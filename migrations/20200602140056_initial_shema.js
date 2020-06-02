@@ -7,7 +7,7 @@ exports.up = function(knex) {
             table.string('category').unique().notNullable();
         })
         .createTable('beers', (table) => {
-            table.increments('id').notNullable();
+            table.integer('id').unique().notNullable();
             table.string('beername').notNullable();
             table.string('brewery');
             table.string('country');

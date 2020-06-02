@@ -18,7 +18,9 @@ exports.seed = function(knex) {
     { id: 13, category: "seasonal brews" },
     { id: 14, category: "stout" },
     { id: 15, category: "wheat beer" },
-    { id: 16, category: "alcohol-free" }
+    { id: 16, category: "alcohol-free" },
+    { id: 17, category: "porter"},
+    { id: 18, category: "vienna" }
 
   ]);
 

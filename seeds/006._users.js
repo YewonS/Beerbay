@@ -2,9 +2,8 @@
 exports.seed = function(knex) {
  
   return knex('table_name').insert([
-    {id: 1, colName: 'rowValue1'},
-    {id: 2, colName: 'rowValue2'},
-    {id: 3, colName: 'rowValue3'}
+    { username: "admin", email: "yewo0003@stud.kea.dk", password: "" }, 
+    { username: "user1", email: "yewonblairseo@gmail.com", password: "" }
   ]);
 
 };

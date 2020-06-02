@@ -1,10 +1,9 @@
 
 exports.seed = function(knex) {
  
-  return knex('table_name').insert([
-    {id: 1, colName: 'rowValue1'},
-    {id: 2, colName: 'rowValue2'},
-    {id: 3, colName: 'rowValue3'}
+  return knex('bar').insert([
+    { name: "bar37", address: "Lygten 37" },
+    { name: "moonbar", address: "Lygten 16" }
   ]);
 
 };
