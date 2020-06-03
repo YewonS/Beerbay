@@ -21,7 +21,7 @@ router.get('/beers/category/:categoryId', async(req, res) => {
 router.get('/beers/name/:beername', async(req, res) => {
     const beername = req.params.beername;
     const beerFound = await Beer.query().select().where({ 'beername': beername }).limit(1);
-    if(beerFound.length > 0) {
+    if (beerFound.length > 0) {
         return res.send({ response: beerFound });
     } else {
         return res.status(400).send({ response: "No beer of the name has found." });
