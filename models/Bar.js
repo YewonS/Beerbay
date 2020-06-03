@@ -3,7 +3,7 @@ const { Model } = require('objection');
 const Collection = require('./Collection.js');
 
 class Bar extends Model {
-    static tablename = 'bars';
+    static tableName = 'bars';
 
     static relationMappings = {
         collection: {

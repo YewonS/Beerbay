@@ -3,7 +3,7 @@ const { Model } = require('objection');
 const Rating = require('./Rating.js');
 
 class User extends Model {
-    static tablename = 'users';
+    static tableName = 'users';
 
     static relationMappings = {
         rating: {

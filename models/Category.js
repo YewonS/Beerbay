@@ -3,7 +3,7 @@ const { Model } = require('objection');
 const Beer = require('./Beer.js');
 
 class Category extends Model {
-    static tablename = 'categories';
+    static tableName = 'categories';
 
     static relationMappings = {
         beer: {
