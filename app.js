@@ -28,9 +28,15 @@ const saltRounds = 12;
 const beerRoute = require('./routes/beers.js');
 const userRoute = require('./routes/users.js');
 const categoryRoute = require('./routes/categories.js');
+const ratingRoute = require('./routes/ratings.js');
+const barRoute = require('./routes/bars.js');
+const collectionRoute = require('./routes/collections.js');
 app.use(beerRoute);
 app.use(userRoute);
 app.use(categoryRoute);
+app.use(ratingRoute);
+app.use(barRoute);
+app.use(collectionRoute);
 
 
 
