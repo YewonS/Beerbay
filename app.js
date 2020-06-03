@@ -4,6 +4,8 @@ const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
+app.use(express.static("public"));
+
 
 /* Setup Objection + Knex */
 
@@ -15,7 +17,11 @@ const knex = Knex(knexFile.development);
 
 Model.knex(knex);
 
-
+const bcrypt = require('bcrypt');
+const saltRounds = 12;
+// bcrypt.hash("password1", saltRounds, function(err, hash) {
+//     console.log(hash);
+// });
 
 /* Start server */
 

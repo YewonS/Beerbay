@@ -6,10 +6,10 @@ exports.seed = function(knex) {
       return knex('bars').del();
     })
     .then(() => {
-      return knex('users').del();
+      return knex('ratings').del();
     })
     .then(() => {
-      return knex('ratings').del();
+      return knex('users').del();
     })
     .then(() => {
       return knex('beers').del();
