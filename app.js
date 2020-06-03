@@ -27,8 +27,10 @@ const saltRounds = 12;
 /* Add routes */
 const beerRoute = require('./routes/beers.js');
 const userRoute = require('./routes/users.js');
+const categoryRoute = require('./routes/categories.js');
 app.use(beerRoute);
 app.use(userRoute);
+app.use(categoryRoute);
 
 
 

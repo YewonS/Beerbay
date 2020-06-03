@@ -2,11 +2,6 @@ const router = require('express').Router();
 
 const User = require('../models/User.js');
 
-router.get('/users', async(req, res)=> {
-    const users = await User.query().select();
-    return res.send({ response: users})
-})
-
 router.get('/user/email/:email', async(req, res) => {
     const email = req.params.email;
     const userFound = await User.query().select('email').where({ 'email': email }).limit(1);
