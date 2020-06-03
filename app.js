@@ -17,11 +17,18 @@ const knex = Knex(knexFile.development);
 
 Model.knex(knex);
 
+
+/* Bcrypt */
+
 const bcrypt = require('bcrypt');
 const saltRounds = 12;
-// bcrypt.hash("password1", saltRounds, function(err, hash) {
-//     console.log(hash);
-// });
+
+
+/* Add routes */
+const beerRoute = require('./routes/beers.js');
+app.use(beerRoute);
+
+
 
 /* Start server */
 
