@@ -57,12 +57,14 @@ const categoryRoute = require('./routes/categories.js');
 const ratingRoute = require('./routes/ratings.js');
 const barRoute = require('./routes/bars.js');
 const collectionRoute = require('./routes/collections.js');
+const authRoute = require('./routes/auth.js');
 app.use(beerRoute);
 app.use(userRoute);
 app.use(categoryRoute);
 app.use(ratingRoute);
 app.use(barRoute);
 app.use(collectionRoute);
+app.use(authRoute);
 
 //TODO: How can I make complicated queries with joined tables?
 
@@ -73,6 +75,9 @@ app.get('/', (req, res) => {
 
     return res.render('main');
 })
+
+
+//TODO: make signup, login, and logout work
 
 
 /* Start server */
