@@ -1,0 +1,25 @@
+body {
+    margin-top: 70px;
+    margin-right: 20px;
+    margin-left: 20px;
+    background-color: #fffcd1;
+}
+
+h2, h1 {
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.button {
+    margin-left: 10px;
+    margin-right: 10px;
+    color: white;
+}
+
+.navbar-light {
+    background-color: #DF8D03;
+}
+
+.navbar-light .navbar-brand{
+    color: #ffffff  !important;
+}
