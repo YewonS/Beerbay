@@ -8,14 +8,6 @@ const bcrypt = require('bcrypt');
 const saltRounds = 12;
 
 
-const goToLoginPage = (req, res, next) => {
-    if(!req.session.user) {
-        res.redirect('/login');
-    } else {
-        next();
-    }
-}
-
 const goToHomePage = (req, res, next) => {
     if (req.session.user) {
         res.redirect('/');
@@ -26,6 +18,13 @@ const goToHomePage = (req, res, next) => {
 
 router.get('/signup', goToHomePage, (req, res) => {
     return res.render('./auth/signup.ejs');
+})
+
+router.get('/login', goToHomePage, (req, res) => {
+    console.log('session:', req.sessionID);
+    console.log('user:', req.session.user);
+ 
+    return res.render('./auth/login.ejs');
 })
 
 router.post('/signup', async (req, res) => {
@@ -71,6 +70,42 @@ router.post('/signup', async (req, res) => {
     }
     
 })
+
+router.post("/login", async (req, res) => {
+
+    const { username, password } = req.body;
+
+    if (username && password) {
+        try {
+            User.query().select('username').where({ 'username': username }).then( async userFound => {
+                if (userFound.length == 0) {
+                    return res.redirect("/login?error");
+                } else {
+                    const matchingPassword = await User.query().select('password').where({ 'username': username }).limit(1);
+                    const passwordToValidate = matchingPassword[0].password;
+
+                    bcrypt.compare(password, passwordToValidate).then((result) => {
+                        if (result) {
+                            req.session.user = username;
+                            return res.redirect("/home");
+                        } else {
+                            return res.redirect("login?error");
+                        }
+                    });
+                }
+
+            });
+        } catch (error) {
+            return res.redirect("/login?error");
+        }
+
+    } else {
+        return res.redirect("/login?error");
+    }
+    
+});
+
+
 
 
 

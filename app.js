@@ -62,14 +62,28 @@ app.use(authRoute);
 
 //TODO: How can I make complicated queries with joined tables?
 
+const goToLoginPage = (req, res, next) => {
+    if (!req.session.user) {
+        res.redirect('/login');
+    } else {
+        next();
+    }
+}
+
 
 app.get('/', (req, res) => {
     console.log("session: ", req.sessionID);
     console.log("user: ", req.session.user);
 
-    return res.render('main');
+    return res.render('main', { sessionUser: req.session.user });
 })
 
+app.get('/home', goToLoginPage, (req, res) => {
+    console.log("session: ", req.sessionID);
+    console.log("user: ", req.session.user);
+
+    return res.render('home', { sessionUser: req.session.user });
+})
 
 //TODO: make signup, login, and logout work
 

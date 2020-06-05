@@ -24,3 +24,13 @@ h2, h1 {
 .navbar-light .navbar-brand{
     color: #ffffff  !important;
 }
+
+.sticky-footer {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    flex-shrink: none;
+    background-color: #C96E12;
+    color: whitesmoke; 
+}
