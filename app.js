@@ -44,12 +44,6 @@ const knex = Knex(knexFile.development);
 Model.knex(knex);
 
 
-/* Bcrypt */
-
-const bcrypt = require('bcrypt');
-const saltRounds = 12;
-
-
 /* Add routes */
 const beerRoute = require('./routes/beers.js');
 const userRoute = require('./routes/users.js');
