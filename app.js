@@ -75,17 +75,16 @@ app.get('/', (req, res) => {
     console.log("session: ", req.sessionID);
     console.log("user: ", req.session.user);
 
-    return res.render('main', { sessionUser: req.session.user });
+    return res.render('./global/main.ejs', { sessionUser: req.session.user });
 })
 
 app.get('/home', goToLoginPage, (req, res) => {
     console.log("session: ", req.sessionID);
     console.log("user: ", req.session.user);
 
-    return res.render('home', { sessionUser: req.session.user });
+    return res.render('./global/home.ejs', { sessionUser: req.session.user });
 })
 
-//TODO: make signup, login, and logout work
 
 
 /* Start server */

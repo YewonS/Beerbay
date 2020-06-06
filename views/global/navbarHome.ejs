@@ -1,0 +1,17 @@
+
+<script src="./global/main.js"></script>
+
+    <nav class="navbar fixed-top navbar-light">
+        <a class="navbar-brand" href="/home">Beergency <i class="fas fa-beer"></i></a>
+        <form class="form-inline buttons">
+            <div class="dropdown">
+                <button class="search-dropdown dropdown-toggle" id="searchButton dropdownMenuButton" role="menu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Search</button>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                    <a class="dropdown-item" href="/search-beers" id="searchBeerButton">Search by beers</a>
+                    <a class="dropdown-item" href="/search-bars" id="searchBarButton">Search by bars</a>
+                </div>
+            </div>
+            <a class="button rate-beers" href="/rate" id="rateButton">Rate Beers</a>
+            <a class="button logout" href="/logout" id="logoutButton">Log out</a>
+        </form>
+    </nav>

@@ -34,3 +34,12 @@ h2, h1 {
     background-color: #C96E12;
     color: whitesmoke; 
 }
+
+.dropdown-item {
+    color: black;
+}
+
+.search-dropdown {
+    color: black;
+    outline: none;
+}
