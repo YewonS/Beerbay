@@ -2,12 +2,12 @@ const router = require('express').Router();
 
 const Category = require('../models/Category.js');
 
-router.get('/categories', async(req, res) => {
+router.get('/api/categories', async(req, res) => {
     const categories = await Category.query().select();
     return res.send({ response: categories });
 })
 
-router.get('/categories/:id', async(req, res) => {
+router.get('/api/categories/:id', async(req, res) => {
     const id = req.params.id;
     const categoryFound = await Category.query().select('category').where({ 'id': id }).limit(1);
     if (categoryFound.length > 0){
@@ -17,7 +17,7 @@ router.get('/categories/:id', async(req, res) => {
     }
 })
 
-router.get('/categories/name/:categoryName', async(req, res) => {
+router.get('/api/categories/name/:categoryName', async(req, res) => {
     const categoryName = req.params.categoryName;
     const categoryFound = await Category.query().select('id').where({ 'category': categoryName }).limit(1);
     if (categoryFound.length > 0) {

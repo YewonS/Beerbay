@@ -2,12 +2,12 @@ const router = require('express').Router();
 
 const Beer = require('../models/Beer.js');
 
-router.get('/beers', async (req, res) => {
+router.get('/api/beers', async (req, res) => {
     const beers = await Beer.query().select();
     return res.send({ response: beers });
 })
 
-router.get('/beers/category/:categoryId', async(req, res) => {
+router.get('/api/beers/category/:categoryId', async(req, res) => {
     const categoryId = req.params.categoryId;
     const beersInCategory = await Beer.query().select().where({ 'categoryId': categoryId });
     if (beersInCategory.length > 0) {
@@ -18,7 +18,7 @@ router.get('/beers/category/:categoryId', async(req, res) => {
 
 })
 
-router.get('/beers/name/:beername', async(req, res) => {
+router.get('/api/beers/name/:beername', async(req, res) => {
     const beername = req.params.beername;
     const beerFound = await Beer.query().select().where({ 'beername': beername }).limit(1);
     if (beerFound.length > 0) {
@@ -28,7 +28,7 @@ router.get('/beers/name/:beername', async(req, res) => {
     }
 })
 
-router.get('/beers/brewery/:brewery', async(req, res) => {
+router.get('/api/beers/brewery/:brewery', async(req, res) => {
     const brewery = req.params.brewery;
     const breweryBeers = await Beer.query().select().where({ 'brewery': brewery });
     if (breweryBeers.length > 0) {

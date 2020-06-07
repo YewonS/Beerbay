@@ -40,6 +40,8 @@ exports.up = function(knex) {
             table.increments('id').notNullable();
             table.string('name').notNullable();
             table.string('address').notNullable();
+            table.double('latitude').notNullable();
+            table.double('longitude').notNullable();
         })
         .createTable('collections', (table) => {
             table.increments('id').notNullable();
@@ -57,8 +59,8 @@ exports.down = function(knex) {
     return knex.schema
         .dropTableIfExists('collections')
         .dropTableIfExists('bars')
-        .dropTableIfExists('users')
         .dropTableIfExists('ratings')
+        .dropTableIfExists('users')
         .dropTableIfExists('beers')
         .dropTableIfExists('categories');
 };
