@@ -18,20 +18,16 @@ function addMarker(data) {
 
     marker = new google.maps.Marker({
         position: { lat: latitude, lng: longitude },
-        map: map
+        map: map,
+        barID: data.id,
+        barName: data.name,
+        barAddress: data.address
     });
     
-}
-
-function addInfo(data) {
-
-    
-    infoWindow = new google.maps.infoWindow({
-        content: collections
+    infoWindow = new google.maps.InfoWindow({
+        content: data.name
     });
     
-
-    // TODO: make jquery listen to click events on each marker, get the bar id and then show collections.
     marker.addListener('click', function() {
         infoWindow.open(map, marker);
     })
@@ -39,31 +35,65 @@ function addInfo(data) {
 }
 
 
-$.ajax({
-    url: `/api/bars`,
-    type: 'GET',
-    dataType: 'json'
-}).done(data => {
-    let bars = data.response;
-    let sizeOfData = bars.length;
 
-    for (let i = 0; i < sizeOfData; i++) {
+$(document).ready(function() {
 
-        addMarker(bars[i]);
+    $.ajax({
+        url: `/api/bars`,
+        type: 'GET',
+        dataType: 'json'
+    }).done(data => {
+        let bars = data.response;
+        let sizeOfData = bars.length;
+    
+        for (let i = 0; i < sizeOfData; i++) {
+    
+            addMarker(bars[i]);
+        }
+    
+    })
+    
 
-        let barID = bars[i].id;
+    $(".btn-dark").on("click", function(){
+        const inputString = $('.search-input').val().toLowerCase();
 
+        // clear the table
+        $('.search-bar-result').html('');
+        
+        // get the bar id
         $.ajax({
-            url: `/api/collections/bar/` + barID,
-            type: 'GET',
-            dataType: 'json'
+            url: `/api/bars/name/` + inputString,
+            type: 'GET'
         }).done(data => {
-            console.log(data.response);
+            let barID = data.response[0].id;
+        
+            // get the collections and display them on the table
+            $.ajax({
+                url: `/api/collections/bar/` + barID,
+                type: 'GET'
+            }).done(data => {
+                let collection = data.response;
+                for (let i = 0; i < collection.length; i++) {
+                    let beer = collection[i];
+                    
+                    $('.search-bar-result').append(`
+                    <tr class="result-row">
+                        <th scope="row">${i+1}</th>
+                        <td>${beer.beername}</td>
+                        <td>${beer.brewery}</td>
+                        <td>${beer.country}</td>
+                        <td>${beer.abv}</td>
+                        <td>${beer.category}</td>
+                    </tr>
+                    `);
+                }
+
+            }).fail(() => {
+                alert("Error happened while bringing the data.");
+            })
+        }).fail(() => {
+            alert("No bar found.");
         })
-    }
+    });
 
-})
-
-
-//TODO: okay, so I will show the bars on the map. Each marker holds bar info like id and name too. So whenever you click marker, you can ajax into the bar and show the collections on the table. There can also be a search bar you can search through the name of the bar and then it shows the collections on the result table.
-
+});

@@ -1,0 +1,9 @@
+#map {
+    width: 900px;
+    height: 700px;
+    color: black;
+}
+
+.search-input {
+    width: 500px;
+}

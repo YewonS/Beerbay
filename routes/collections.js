@@ -21,9 +21,11 @@ router.get('/api/collections/beer/:id', async(req, res) => {
 // find all the collections a bar has - with beer names!!
 router.get('/api/collections/bar/:id', async(req, res) => {
     const barID = req.params.id;
-    const collections = await Collection.query().select('collections.bar_id', 'bars.name', 'collections.beer_id', 'beers.*')
+    const collections = await Collection.query().select('collections.bar_id', 'bars.name', 'collections.beer_id', 'beers.*', 'categories.category')
                         .where({ 'barId': barID })
-                        .join('beers', 'collections.beer_id', '=', 'beers.id').join('bars', 'collections.bar_id', '=', 'bars.id');
+                        .join('beers', 'collections.beer_id', '=', 'beers.id')
+                        .join('bars', 'collections.bar_id', '=', 'bars.id')
+                        .join('categories', 'beers.category_id', '=', 'categories.id');
     if (collections.length > 0) {
         return res.send({ response: collections });
     } else {
