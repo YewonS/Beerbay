@@ -27,6 +27,10 @@ router.get('/login', goToHomePage, (req, res) => {
     return res.render('./auth/login.ejs');
 })
 
+
+//TODO: this will be the final touch. Make sure you cannot access to rate page and search pages unless you are logged in.
+// TODO: make a tiny chat system with sockets. just with messages saying that chat system is to be deployed in the future.
+
 router.post('/signup', async (req, res) => {
     
     const { username, email, password, passwordRepeat } = req.body;
