@@ -1,6 +1,6 @@
+apiConfig.js
 rdsCredentials.js
 configSession.json
-search-bars.ejs
 
 
 # Created by https://www.toptal.com/developers/gitignore/api/node
