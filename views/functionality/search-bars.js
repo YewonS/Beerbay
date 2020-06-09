@@ -122,6 +122,7 @@ $(document).ready(function() {
     $(".btn-dark").on("click", function(){
         const inputString = $('.search-input').val().toLowerCase();
 
+
         getCollections(inputString);
 
         openInfoWindow(inputString);
