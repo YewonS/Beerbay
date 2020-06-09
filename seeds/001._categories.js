@@ -10,7 +10,7 @@ exports.seed = function(knex) {
     { id: 5, category: "hefeweizen" },
     { id: 6, category: "ipa" },
     { id: 7, category: "lager" }, 
-    { id: 8, category: "organicc" },
+    { id: 8, category: "organic" },
     { id: 9, category: "pale ale" },
     { id: 10, category: "pilsner" },
     { id: 11, category: "red ale" },

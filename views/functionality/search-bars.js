@@ -77,14 +77,14 @@ $(document).ready(function() {
                     let beer = collection[i];
                     
                     $('.search-bar-result').append(`
-                    <tr class="result-row">
-                        <th scope="row">${i+1}</th>
-                        <td>${beer.beername}</td>
-                        <td>${beer.brewery}</td>
-                        <td>${beer.country}</td>
-                        <td>${beer.abv}</td>
-                        <td>${beer.category}</td>
-                    </tr>
+                        <tr class="result-row">
+                            <th scope="row">${i+1}</th>
+                            <td>${beer.beername}</td>
+                            <td>${beer.brewery}</td>
+                            <td>${beer.country}</td>
+                            <td>${beer.abv}</td>
+                            <td>${beer.category}</td>
+                        </tr>
                     `);
                 }
 
