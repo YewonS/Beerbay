@@ -9,14 +9,12 @@ function initMap() {
 
 }
 
-let marker, infoWindow;
-
 function addMarker(data) {
 
     let latitude = data.latitude;
     let longitude = data.longitude;
 
-    marker = new google.maps.Marker({
+    let marker = new google.maps.Marker({
         position: { lat: latitude, lng: longitude },
         map: map,
         barID: data.id,
@@ -24,13 +22,13 @@ function addMarker(data) {
         barAddress: data.address
     });
     
-    infoWindow = new google.maps.InfoWindow({
+    let infoWindow = new google.maps.InfoWindow({
         content: data.name
     });
     
     marker.addListener('click', function() {
         infoWindow.open(map, marker);
-    })
+    });
 
 }
 
