@@ -28,7 +28,7 @@ router.get('/login', goToHomePage, (req, res) => {
 })
 
 
-//TODO: this will be the final touch. Make sure you cannot access to rate page and search pages unless you are logged in.
+//TODO: this will be the final touch before making ratings. Make sure you cannot access to rate page and search pages unless you are logged in.
 // TODO: make a tiny chat system with sockets. just with messages saying that chat system is to be deployed in the future.
 
 router.post('/signup', async (req, res) => {
