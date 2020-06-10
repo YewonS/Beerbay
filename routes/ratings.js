@@ -20,7 +20,8 @@ router.get('/api/ratings/beerid/:id', async(req, res)=> {
 
 router.get('/api/ratings/userid/:id', async(req, res) => {
     const id = req.params.id;
-    const ratingFound = await Rating.query().select().where({ 'userId': id });
+    const ratingFound = await Rating.query().select('ratings.*', 'beers.*', 'categories.category').where({ 'userId': id })
+                            .join('beers', 'ratings.beer_id', '=', 'beers.id').join('categories', 'beers.category_id', '=', 'categories.id');
     if (ratingFound.length > 0) {
         return res.send({ response: ratingFound });
     } else {

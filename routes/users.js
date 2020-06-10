@@ -2,7 +2,7 @@ const router = require('express').Router();
 
 const User = require('../models/User.js');
 
-router.get('/user/email/:email', async(req, res) => {
+router.get('/api/user/email/:email', async(req, res) => {
     const email = req.params.email;
     const userFound = await User.query().select('email').where({ 'email': email }).limit(1);
     if (userFound.length > 0) {
@@ -13,9 +13,9 @@ router.get('/user/email/:email', async(req, res) => {
 
 })
 
-router.get('/user/username/:username', async(req, res) => {
+router.get('/api/user/username/:username', async(req, res) => {
     const username = req.params.username;
-    const userFound = await User.query().select('username').where({ 'username': username }).limit(1);
+    const userFound = await User.query().select('username', 'id').where({ 'username': username }).limit(1);
     if (userFound.length > 0) {
         return res.send({ response: userFound });
     } else {
