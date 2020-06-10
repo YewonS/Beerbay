@@ -1,10 +1,19 @@
+let url = window.location.href;
+url = url.substr(url.lastIndexOf("/") + 1);
+let beerID
+if(url.includes(":"))
+    beerId = url.substr(url.lastIndexOf(":") + 1);
+else    
+    beerId = null;
+
+
 let map;
 
 function initMap() {
     const cph = { lat: 55.676098, lng: 12.568337 };
     map = new google.maps.Map(document.getElementById('map'), {
         center: cph,
-        zoom: 12
+        zoom: 11
     });
 
 }
@@ -55,6 +64,19 @@ function openInfoWindow(barName) {
                 infoWindow.open(map, marker);
         });
             
+    });
+}
+
+function showAllBars(barList) {
+    console.log(barList.response);
+    barList.forEach((bar) => {
+        infoWindowList.forEach((infoWindow) => {
+            if(infoWindow.content === bar.name)
+                markersList.forEach((marker) => {
+                    if(marker.barName === infoWindow.content)
+                        infoWindow.open(map, marker);
+                });
+        });
     });
 }
 
@@ -117,6 +139,16 @@ $(document).ready(function() {
         }
     
     });
+
+    if(beerId)
+        $.ajax({
+            url: `/api/collections/beer/${beerId}`,
+            type: 'GET',
+            dataType: 'json'
+        }).done(data => {
+            showAllBars(data.response);
+        });
+    
     
 
     $(".btn-dark").on("click", function(){

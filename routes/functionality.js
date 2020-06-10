@@ -12,6 +12,10 @@ router.get('/search-bars', (req, res) => {
     return res.render('./functionality/search-bars.ejs', { gMapsApiKey : gmapsApiKey });
 })
 
+router.get('/search-bars:barId', (req, res) => {
+    return res.render('./functionality/search-bars.ejs',{gMapsApiKey : gmapsApiKey});
+})
+
 router.get('/rating', (req, res) => {
     return res.render('./functionality/rating.ejs', { user: req.session.user });
 })
