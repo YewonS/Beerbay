@@ -1,5 +1,19 @@
 $(document).ready(function() {
 
+    function displayBeers(i, beer) {
+        
+        $('.search-beer-result').append(`<tr class="result-row">
+                                                        <th scope="row">1</th>
+                                                        <td>${beer[i].beername}</td>
+                                                        <td>${beer[i].brewery}</td>
+                                                        <td>${beer[i].country}</td>
+                                                        <td>${beer[i].abv}</td>
+                                                        <td>${beer[i].category}</td>
+                                                        <td class="find-bars"><a class="btn btn-dark" href="/search-bars:${beer[i].id}" val="${beer[i].id}"><i class="fa fa-search"></i></a></td>
+                                                    </tr>`);
+
+    }
+
     $.ajax({
         url: `/api/categories`,
         type: 'GET'
@@ -24,17 +38,9 @@ $(document).ready(function() {
                 type: 'GET'
             }).done(data => {
                 const beer = data.response;
+                $('.search-beer-result').html('');
+                displayBeers(0, beer);
                 
-                $('.search-beer-result').append(`<tr class="result-row">
-                                                        <th scope="row">1</th>
-                                                        <td>${beer[0].beername}</td>
-                                                        <td>${beer[0].brewery}</td>
-                                                        <td>${beer[0].country}</td>
-                                                        <td>${beer[0].abv}</td>
-                                                        <td>${beer[0].category}</td>
-                                                        <td class="find-bars"><button class="btn btn-dark" val="${beer[0].id}"><i class="fa fa-search"></i></button></td>
-                                                    </tr>`);
-
             }).fail(() => {
                 alert("No beer of the name and category found.");
             })
@@ -46,16 +52,9 @@ $(document).ready(function() {
                 type: 'GET'
             }).done(data => {
                 const beers = data.response;
+                $('.search-beer-result').html('');
                 for (let i in beers) {
-                    $('.search-beer-result').append(`<tr class="result-row">
-                                                        <th scope="row">${i}</th>
-                                                        <td>${beers[i].beername}</td>
-                                                        <td>${beers[i].brewery}</td>
-                                                        <td>${beers[i].country}</td>
-                                                        <td>${beers[i].abv}</td>
-                                                        <td>${beers[i].category}</td>
-                                                        <td class="find-bars"><button class="btn btn-dark" val="${beers[i].id}"><i class="fa fa-search"></i></button></td>
-                                                    </tr>`);
+                    displayBeers(i, beers);
                 }
 
             }).fail(() => {
@@ -69,16 +68,9 @@ $(document).ready(function() {
                 type: 'GET'
             }).done(data => {
                 const beers = data.response;
+                $('.search-beer-result').html('');
                 for (let i in beers) {
-                    $('.search-beer-result').append(`<tr class="result-row">
-                                                        <th scope="row">${i}</th>
-                                                        <td>${beers[i].beername}</td>
-                                                        <td>${beers[i].brewery}</td>
-                                                        <td>${beers[i].country}</td>
-                                                        <td>${beers[i].abv}</td>
-                                                        <td>${beers[i].category}</td>
-                                                        <td class="find-bars"><button class="btn btn-dark" val="${beers[i].id}"><i class="fa fa-search"></i></button></td>
-                                                    </tr>`);
+                    displayBeers(i, beers);
                 }
 
             }).fail(() => {
@@ -93,16 +85,9 @@ $(document).ready(function() {
                 type: 'GET'
             }).done(data => {
                 const beers = data.response;
+                $('.search-beer-result').html('');
                 for (let i in beers) {
-                    $('.search-beer-result').append(`<tr class="result-row">
-                                                        <th scope="row">${i}</th>
-                                                        <td>${beers[i].beername}</td>
-                                                        <td>${beers[i].brewery}</td>
-                                                        <td>${beers[i].country}</td>
-                                                        <td>${beers[i].abv}</td>
-                                                        <td>${beers[i].category}</td>
-                                                        <td class="find-bars"><button class="btn btn-dark" val="${beers[i].id}"><i class="fa fa-search"></i></button></td>
-                                                    </tr>`);
+                    displayBeers(i, beers);
                 }
             }).fail(() => {
                 alert("No beer found.");
