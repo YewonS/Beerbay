@@ -1,4 +1,3 @@
-<!-- TODO: make a table of beers. Make a search bar you can search by the name of beers. And then you add ratings to that beer. -->
 <%- include('../global/header.ejs') %>
 <%- include('../global/navbarHome.ejs') %>
 
@@ -39,16 +38,13 @@
                 </div>
                 <div class="modal-body">
                   <p>Rate the beer.</p>
-                    <input type="checkbox" id="rate1" name="rate1" value="1">
-                    <label for="rate1"> 1</label><br>
-                    <input type="checkbox" id="rate2" name="rate2" value="2">
-                    <label for="rate2"> 2</label><br>
-                    <input type="checkbox" id="rate3" name="rate3" value="3">
-                    <label for="rate3"> 3</label><br>
-                    <input type="checkbox" id="rate4" name="rate4" value="4">
-                    <label for="rate4"> 4</label><br>
-                    <input type="checkbox" id="rate5" name="rate5" value="5">
-                    <label for="rate5"> 5</label><br>
+                    <div class="stars">
+                        <button class="star" value="1"><i class="far fa-star"></i></button>
+                        <button class="star" value="2"><i class="far fa-star"></i></button>
+                        <button class="star" value="3"><i class="far fa-star"></i></button>
+                        <button class="star" value="4"><i class="far fa-star"></i></button>
+                        <button class="star" value="5"><i class="far fa-star"></i></button>
+                    </div>
                 </div>
                 <div class="modal-footer">
                   <button type="button" class="btn btn-warning save-btn">Save</button>

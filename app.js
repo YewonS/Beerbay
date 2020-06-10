@@ -62,7 +62,6 @@ app.use(collectionRoute);
 app.use(authRoute);
 app.use(functionRoute);
 
-//TODO: How can I make complicated queries with joined tables?
 
 const goToLoginPage = (req, res, next) => {
     if (!req.session.user) {

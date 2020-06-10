@@ -28,7 +28,6 @@ router.get('/login', goToHomePage, (req, res) => {
 })
 
 
-//TODO: this will be the final touch before making ratings. Make sure you cannot access to rate page and search pages unless you are logged in.
 // TODO: make a tiny chat system with sockets. just with messages saying that chat system is to be deployed in the future.
 
 router.post('/signup', async (req, res) => {
@@ -49,6 +48,7 @@ router.post('/signup', async (req, res) => {
                 
             const userFound = await User.query().select().where({ 'username': username }).limit(1);
             if (userFound.length > 0) {
+
                 alert("Username already exits.");
                 return res.redirect('/signup');
             } else {

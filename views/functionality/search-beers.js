@@ -99,5 +99,3 @@ $(document).ready(function() {
   
 
 })
-
-//TODO: finish Find bars

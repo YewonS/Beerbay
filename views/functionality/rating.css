@@ -1,3 +1,10 @@
 .modal {
     color: black;
 }
+
+.star {
+    color: gold;
+    font-size: 2.5em;
+    background-color: white;
+    border: none;
+}
