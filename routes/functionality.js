@@ -3,6 +3,8 @@ const router = require('express').Router();
 const credentials = require('../config/apiConfig.js');
 const gmapsApiKey = credentials.gmapsApiKey
 
+const Rating = require('../models/Rating.js');
+
 const goToLoginPage = (req, res, next) => {
     if (!req.session.user) {
         res.redirect('/login');
@@ -30,6 +32,7 @@ router.get('/rating', goToLoginPage, (req, res) => {
 router.post('/add-rating', goToLoginPage, async(req, res) => { 
 
     const { userID, beerID, rating } = req.body;
+    console.log(userID, beerID, rating);
 
     if (userID && beerID && rating) {
 
@@ -40,10 +43,9 @@ router.post('/add-rating', goToLoginPage, async(req, res) => {
         });
 
         return res.redirect('/ratings');
-        
+
     } else { 
-        alert("Missing information.");
-        return res.redirect('/ratings');
+        return res.redirect('/ratings?error');
     }
 
 

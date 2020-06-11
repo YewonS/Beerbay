@@ -39,67 +39,89 @@ $(document).ready(function () {
     
     // add ratings
 
-    const beer = $('#search-beername').val();
-    
-    $('.add-rating-btn').on('click', function() {
-       
-        const beername = $('#search-beername').val();
-        const beerID = 0;
+    let beerID;
 
+    $('.add-rating-btn').on('click', function () {
+        
+        const beername = $('#search-beername').val();
+       
         $.ajax({
             url: `/api/beers/name/` + beername,
             type: 'GET'
         }).done(data => {
             const beer = data.response;
-            beerID = beer[0].id;            
-            console.log("beerId", beerID);
+            beerID = beer[0].id;
+        
         }).fail(() => {
             alert("Please type in correct name of the beer.");
-        });
+        })
 
-        $('.star').on('click', function () {
-
-            console.log("rating button clicked");
-
-            const rating = $(this).val();
-            $('.star').html('<i class="fas fa-star"></i>');
-
-            $('.save-btn').on('click', function () {
-
-                console.log("save button clicked");
-                if (rating) {
-                    console.log("add rating");
-                    addRating(beerID, rating);
-                } else {
-                    alert("Please choose rating.");
-                }
-
-            });
-
-        });
     });
+
+    let rating;
+
+    $('#s1').on('click', function () {
+        $('.fa-star').css("color", "gray");
+        $('#s1').css("color", "gold");
+        rating = $(this).attr('data-rating');
+    });
+    $('#s2').on('click', function () {
+        $('.fa-star').css("color", "gray");
+        $('#s1, #s2').css("color", "gold");
+        rating = $(this).attr('data-rating');
+    });
+    $('#s3').on('click', function () {
+        $('.fa-star').css("color", "gray");
+        $('#s1, #s2, #s3').css("color", "gold");
+        rating = $(this).attr('data-rating');
+    });
+    $('#s4').on('click', function () {
+        $('.fa-star').css("color", "gray");
+        $('#s1, #s2, #s3, #s4').css("color", "gold");
+        rating = $(this).attr('data-rating');
+    });
+    $('#s5').on('click', function () {
+        $('.fa-star').css("color", "gray");
+        $('#s1, #s2, #s3, #s4, #s5').css("color", "gold");
+        rating = $(this).attr('data-rating');
+    });
+    
+    $('#save-btn').on('click', function () {
+
+        rating = Number(rating);
+        addRating(beerID, rating);
+
+    })
+    
 
 
     function addRating(beerID, rating) {
-        const userID;
 
         $.ajax({
             url: `/api/user/username/` + user,
             type: 'GET'
         }).done(data => {
             const user = data.response;
-            userID = user[0].id;
+            const userID = user[0].id;
 
-            const data = {
+            const ratingData = {
                 userID: userID,
                 beerID: beerID,
                 rating: rating
             }
+            console.log("front-end", ratingData);
 
-            $.post('/add-rating', { data }).done(function () { 
-                console.log("New rating added", data);
+            $.ajax({
+                url: `/add-rating`,
+                type: "POST",
+                dataType: "json",
+                data: JSON.stringify(ratingData),
+                contentType: "application/json; charset=utf-8"
+            }).done(function () { 
+
+                console.log("New rating added", ratingData);
                 
-            }).fail(() => { 
+            }).fail(() => { //TODO: it adds the data into db. But it throws fail. what the hell is wrong?!
                 alert("Error happened while adding rating. Please try again.");
             })
 
@@ -112,4 +134,4 @@ $(document).ready(function () {
     
 });
 
-//TODO: fix this......
+//TODO: fix this
