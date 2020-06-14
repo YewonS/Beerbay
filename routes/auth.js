@@ -49,23 +49,22 @@ router.post('/signup', async (req, res) => {
                 const userFound = await User.query().select().where({ 'username': username }).limit(1);
                 const emailFound = await User.query().select().where({ 'email': email }).limit(1);
 
-            if (userFound.length > 0 || emailFound.length > 0) {
+                if (userFound.length > 0 || emailFound.length > 0) {
 
-                alert("Username or email address already exits.");
-                return res.redirect('/signup');
+                    return res.redirect('/signup?error');
 
-            } else {
+                } else {
 
-                const hashedPassword = await bcrypt.hash(password, saltRounds);
-                const createdUser = await User.query().insert({
-                    username,
-                    email,
-                    password: hashedPassword
-                });
+                    const hashedPassword = await bcrypt.hash(password, saltRounds);
+                    const createdUser = await User.query().insert({
+                        username,
+                        email,
+                        password: hashedPassword
+                    });
 
-                req.session.user = username;
-                return res.redirect("/login");
-            }
+                    req.session.user = username;
+                    return res.redirect("/login");
+                }
 
             } catch (error) {
                 return res.status(500).send({ response: "Something went wrong with the database." });
