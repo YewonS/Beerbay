@@ -2,39 +2,29 @@ $(document).ready(function () {
 
     // get ratings of the user
     $.ajax({
-        url: `/api/user/username/` + user,
+        url: `/api/ratings/user/username/` + user,
         type: 'GET'
+    
     }).done(data => {
-        const user = data.response;
-        const userID = user[0].id;
+        const ratings = data.response;
 
-        $.ajax({
-            url: `/api/ratings/userid/` + userID,
-            type: 'GET'
-        }).done(data => {
-            const ratings = data.response;
+        for (let i = 0; i < ratings.length; i++) {
+            let rating = ratings[i];
 
-            for (let i = 0; i < ratings.length; i++) {
-                let rating = ratings[i];
-
-                $('.ratings-tbody').append(`<tr class="result-row">
-                                                    <th scope="row">${i+1}</th>
-                                                    <td>${rating.beername}</td>
-                                                    <td>${rating.brewery}</td>
-                                                    <td>${rating.country}</td>
-                                                    <td>${rating.abv}</td>
-                                                    <td>${rating.category}</td>
-                                                    <td>${rating.ratings}</td>
-                                                </tr>
-                    `);
-            }
-
-        }).fail(() => {
-            alert("No ratings of the user found.");
-        })
+            $('.ratings-tbody').append(`<tr class="result-row">
+                                                <th scope="row">${i+1}</th>
+                                                <td>${rating.beername}</td>
+                                                <td>${rating.brewery}</td>
+                                                <td>${rating.country}</td>
+                                                <td>${rating.abv}</td>
+                                                <td>${rating.category}</td>
+                                                <td>${rating.ratings}</td>
+                                            </tr>
+                `);
+        }
 
     }).fail(() => {
-        alert("Error happened while bringing the data.");
+        alert("No ratings of the user found.");
     })
     
     // add ratings
@@ -133,5 +123,3 @@ $(document).ready(function () {
     }
     
 });
-
-//TODO: fix this
