@@ -14,19 +14,19 @@ const goToLoginPage = (req, res, next) => {
 }
 
 router.get('/search-beers', goToLoginPage, (req, res) => {
-    return res.render('./functionality/search-beers.ejs');
+    return res.render('./functionality/search-beers.ejs', { sessionUser: req.session.user });
 })
 
 router.get('/search-bars', goToLoginPage,(req, res) => {
-    return res.render('./functionality/search-bars.ejs', { gMapsApiKey : gmapsApiKey });
+    return res.render('./functionality/search-bars.ejs', { gMapsApiKey : gmapsApiKey, sessionUser: req.session.user });
 })
 
 router.get('/search-bars:barId', goToLoginPage, (req, res) => {
-    return res.render('./functionality/search-bars.ejs',{gMapsApiKey : gmapsApiKey});
+    return res.render('./functionality/search-bars.ejs',{gMapsApiKey : gmapsApiKey, sessionUser: req.session.user});
 })
 
 router.get('/rating', goToLoginPage, (req, res) => {
-    return res.render('./functionality/rating.ejs', { user: req.session.user });
+    return res.render('./functionality/rating.ejs', { sessionUser: req.session.user });
 })
 
 router.post('/add-rating', goToLoginPage, async(req, res) => { 
@@ -38,17 +38,21 @@ router.post('/add-rating', goToLoginPage, async(req, res) => {
 
         const createRating = await Rating.query().insert({
             ratings: rating,
-            beer_id: beerID,
-            user_id: userID
+            beerId: beerID,
+            userId: userID
         });
 
-        return res.redirect('/ratings');
+        return res.send(createRating);
 
     } else { 
-        return res.redirect('/ratings?error');
+        return res.send({});
     }
 
 
+})
+
+router.get('/chat', goToLoginPage, (req, res) => {
+    return res.render('./functionality/chat.ejs', { sessionUser: req.session.user });
 })
 
 

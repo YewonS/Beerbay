@@ -94,30 +94,42 @@ $(document).ready(function () {
             const user = data.response;
             const userID = user[0].id;
 
-            const ratingData = {
-                userID: userID,
-                beerID: beerID,
-                rating: rating
-            }
-            console.log("front-end", ratingData);
+            if(userID && beerID && rating) {
+        
+                    const ratingData = {
+                        userID: userID,
+                        beerID: beerID,
+                        rating: rating
+                    }
+        
+                    $.ajax({
+                        url: `/add-rating`,
+                        type: "POST",
+                        dataType: "json",
+                        data: JSON.stringify(ratingData),
+                        contentType: "application/json; charset=utf-8"
+                    }).done((data) => { 
 
-            $.ajax({
-                url: `/add-rating`,
-                type: "POST",
-                dataType: "json",
-                data: JSON.stringify(ratingData),
-                contentType: "application/json; charset=utf-8"
-            }).done(function () { 
+        
+                        console.log("New rating added", data);
+                        setTimeout(function(){ $('#ratings-modal').modal('hide');},100);
+                        alert("New rating added");
+                     
 
-                console.log("New rating added", ratingData);
-                
-            }).fail(() => { //TODO: it adds the data into db. But it throws fail. what the hell is wrong?!
-                alert("Error happened while adding rating. Please try again.");
+                        
+                    }).fail(() => { //TODO: it adds the data into db. But it throws fail. what the hell is wrong?!
+                        alert("Error happened while adding rating. Please try again.");
+                    })
+        
+                    
+                } else {
+                    alert("Information wrong.");
+                }
+
+
+            }).fail(() => { 
+                alert("Please log in to add a new rating.");
             })
-
-        }).fail(() => { 
-            alert("Please log in to add a new rating.");
-        })
 
 
     }

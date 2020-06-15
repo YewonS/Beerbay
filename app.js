@@ -9,6 +9,22 @@ app.use(express.static("views"));
 app.set('view engine', 'ejs');
 const ejs = require('ejs');
 
+/* Socket.io*/
+
+const server = require("http").createServer(app);
+const io = require("socket.io")(server);
+
+const escape = require('escape-html');
+
+io.on('connection', socket => {
+
+    socket.on('a client wrote this', (data) => {
+        // emits to all clients
+        io.emit("A client said", { message: escape(data.message) , username: data.username});
+    });
+
+
+});
 
 /* Session */
 
@@ -71,8 +87,15 @@ const goToLoginPage = (req, res, next) => {
     }
 }
 
+const goToHomePage = (req, res, next) => {
+    if (req.session.user) {
+        res.redirect('/home');
+    } else {
+        next();
+    }
+}
 
-app.get('/', (req, res) => {
+app.get('/', goToHomePage, (req, res) => {
     console.log("session: ", req.sessionID);
     console.log("user: ", req.session.user);
 
@@ -92,7 +115,7 @@ app.get('/home', goToLoginPage, (req, res) => {
 
 const PORT = 3000;
 
-app.listen(PORT, (error) => {
+server.listen(PORT, (error) => {
     if (error) {
         console.log(error);
     }

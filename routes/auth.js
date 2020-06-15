@@ -10,7 +10,7 @@ const saltRounds = 12;
 
 const goToHomePage = (req, res, next) => {
     if (req.session.user) {
-        res.redirect('/');
+        res.redirect('/home');
     } else {
         next();
     }

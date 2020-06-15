@@ -3,13 +3,13 @@
 
 <script src="./functionality/rating.js"></script>
 <script>
-    const user = "<%= user %>";
+    const user = "<%= sessionUser %>";
 </script>
 
- <!-- css -->
- <link rel="stylesheet" type="text/css" href="./functionality/rating.css">
+<!-- css -->
+<link rel="stylesheet" type="text/css" href="./functionality/rating.css">
 
-<h3> Welcome, <%= user %>. </h3>
+<h3> Welcome, <%= sessionUser %>. </h3>
 <h5>Type in the name of the beer to add ratings. </h5>
 
     <div class="search">
@@ -73,5 +73,5 @@
         </tbody>
     </table>
 
-
+<%- include('../global/chat.ejs') %>
 <%- include('../global/footer.ejs') %>

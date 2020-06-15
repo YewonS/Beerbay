@@ -1,6 +1,9 @@
 <%- include('./header.ejs') %>
 <%- include('./navbarHome.ejs') %>
 
+<script>
+  const user = "<%= sessionUser %>";
+</script>
 
 <h1>Welcome to Beergency!</h1>
 <h3>Find your significant beer:D</h3>
@@ -21,5 +24,5 @@
 
 </span>
 
-
+<%- include('./chat.ejs') %>
 <%- include('./footer.ejs') %>

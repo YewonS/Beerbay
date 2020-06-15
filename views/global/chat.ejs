@@ -1,0 +1,58 @@
+<!-- css -->
+<link rel="stylesheet" type="text/css" href="./global/chat.css">
+
+<script src="./global/chat.js"></script>
+
+<div class="chat">
+    <button class="btn btn-warning open-button" onclick="displayForm()">Chat</button>
+    <div class="chat-popup" id="myForm">
+        <form class="form-container"></form>
+
+            <h1>Chat</h1>
+            <div id="conversation"></div>
+        
+            <div class="fixedBottom input-group-prepend">
+                <input class="form-control" id="message" placeholder="Type message.." name="msg" required></input>
+                <button class="btn btn-outline-secondary" id="submit" >Send</button>
+            </div>
+        </div>
+    </div>
+</div>
+<footer class="page-footer sticky-footer font-small">
+    <div class="footer-copyright text-center"> Please drink responsibly <i class="far fa-grin-wink"></i> 
+        2020 Copyright &copy; <a href="/"> Beergency.com</a>
+    </div>
+</footer>
+
+<script src="socket.io/socket.io.js"></script>
+<script>
+    const socket = io.connect("localhost:3000");
+
+    $('#submit').click(() => {
+        const message = $('#message').val();
+        const username = user;
+        console.log(username);
+        $('#message').val('');
+        socket.emit(`a client wrote this`, { message, username });
+    });
+
+    socket.on('A client said', data => {
+        $('#conversation').append(`<div>${data.username}: ${data.message}</div>`);
+    });
+</script>
+<script>
+    let open = false
+    function displayForm() {
+        if(!open){
+            document.getElementById("myForm").style.display = "block";
+            open = true
+        }
+        else{
+            document.getElementById("myForm").style.display = "none";
+            open = false
+        }
+            
+        
+    }
+    
+</script>

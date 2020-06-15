@@ -1,0 +1,49 @@
+.open-button {
+    background-color: #555;
+    color: white;
+    padding: 16px 20px;
+    border: none;
+    cursor: pointer;
+    opacity: 0.8;
+    position: fixed;
+    bottom: 23px;
+    right: 3em;
+    width: 350px;
+}
+
+/* The popup chat - hidden by default */
+.chat-popup {
+    display: none;
+    position: fixed;
+    background-color: #C96E12;
+    bottom: 5em;
+    right: 3em;
+    border: 3px solid #555;
+    width: 350px;
+    height: 500px;
+    z-index: 9;
+}
+
+.fixedBottom {
+    position: fixed;
+    bottom: 5em;
+    right: 3em;
+}
+
+#message {
+    padding-top: 0px;
+    padding-right: 0px;
+    padding-bottom: 0px;
+    padding-left: 0px;
+    width: 280px;
+    height: 50px;
+}
+#submit{
+    background-color: #555;
+    /* color: black; */
+    padding-top: 0px;
+    padding-bottom: 0px;
+    width: 68px;
+}   
+  
+  

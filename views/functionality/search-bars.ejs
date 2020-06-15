@@ -1,6 +1,9 @@
 <%- include('../global/header.ejs') %>
 <%- include('../global/navbarHome.ejs') %>
 
+<script>
+  const user = "<%= sessionUser %>";
+</script>
 
 <script src=<%-JSON.stringify(gMapsApiKey)%>async defer></script>
 <script src="./functionality/search-bars.js"></script>
@@ -37,5 +40,5 @@
   </table>
 
 
-
+<%- include('../global/chat.ejs') %>
 <%- include('../global/footer.ejs') %>
