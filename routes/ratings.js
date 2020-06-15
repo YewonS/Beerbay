@@ -11,7 +11,7 @@ router.get('/api/ratings/beerid/:id', async (req, res) => {
         return res.status(400).send({ response: "No ratings of the beer id found." });
     }
 
-})
+});
 
 
 module.exports = router;

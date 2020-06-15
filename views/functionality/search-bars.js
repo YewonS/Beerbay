@@ -1,10 +1,11 @@
 let url = window.location.href;
 url = url.substr(url.lastIndexOf("/") + 1);
-let beerID
-if(url.includes(":"))
+let beerID;
+if (url.includes(":")) {
     beerId = url.substr(url.lastIndexOf(":") + 1);
-else    
+} else {
     beerId = null;
+}
 
 
 let map;
@@ -39,8 +40,9 @@ function addMarker(data) {
     });
     
     marker.addListener('click', function() {
-        if(markersList)
+        if (markersList) {
             closeInfoWindow();
+        }
         infoWindow.open(map, marker);
         getCollections(marker.barName);
     });
@@ -56,12 +58,13 @@ function closeInfoWindow() {
 
 function openInfoWindow(barName) {
     //We cut the whitespace at the end of the barName
-    barName = barName.trim()
+    barName = barName.trim();
     closeInfoWindow();
     infoWindowList.forEach((infoWindow) => {
         markersList.forEach((marker) => {
-            if(marker.barName === barName && infoWindow.content === barName)
+            if (marker.barName === barName && infoWindow.content === barName) {
                 infoWindow.open(map, marker);
+            }
         });
             
     });
@@ -71,11 +74,13 @@ function showAllBars(barList) {
     console.log(barList.response);
     barList.forEach((bar) => {
         infoWindowList.forEach((infoWindow) => {
-            if(infoWindow.content === bar.name)
+            if (infoWindow.content === bar.name) {
                 markersList.forEach((marker) => {
-                    if(marker.barName === infoWindow.content)
+                    if (marker.barName === infoWindow.content) {
                         infoWindow.open(map, marker);
+                    }   
                 });
+            }
         });
     });
 }
@@ -103,7 +108,7 @@ function getCollections(barName) {
                 
                 $('.search-bar-result').append(`
                 <tr class="result-row">
-                    <th scope="row">${i+1}</th>
+                    <th scope="row">${i + 1}</th>
                     <td>${beer.beername}</td>
                     <td>${beer.brewery}</td>
                     <td>${beer.country}</td>
@@ -115,10 +120,10 @@ function getCollections(barName) {
 
         }).fail(() => {
             alert("Error happened while bringing the data.");
-        })
+        });
     }).fail(() => {
         alert("No bar found.");
-    })
+    });
 }
 
 

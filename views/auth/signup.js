@@ -4,8 +4,6 @@ function validateUser() {
     const email = document.forms.signupform.email.value;
     const password = document.forms.signupform.password.value;
     const passwordRepeat = document.forms.signupform.passwordRepeat.value;
-    
-    console.log("validate user ", username);
 
     if (!username) {
         alert("Username field is missing.");

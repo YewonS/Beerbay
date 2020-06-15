@@ -28,8 +28,6 @@ router.get('/login', goToHomePage, (req, res) => {
 })
 
 
-// TODO: make a tiny chat system with sockets. just with messages saying that chat system is to be deployed in the future.
-
 router.post('/signup', async (req, res) => {
     
     const { username, email, password, passwordRepeat } = req.body;
@@ -76,7 +74,7 @@ router.post('/signup', async (req, res) => {
         return res.status(404).send({ response: "Missing fields: username, password, passwordRepeat" });
     }
     
-})
+});
 
 router.post("/login", async (req, res) => {
 
@@ -113,9 +111,9 @@ router.post("/login", async (req, res) => {
 });
 
 router.get("/logout", (req, res) => {
-    req.session.destroy((error)=> {
+    req.session.destroy((error) => {
         console.log("Error happend when logging out:", error);
-    })
+    });
     return res.redirect('/');
 });
 

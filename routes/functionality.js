@@ -15,21 +15,21 @@ const goToLoginPage = (req, res, next) => {
 
 router.get('/search-beers', goToLoginPage, (req, res) => {
     return res.render('./functionality/search-beers.ejs', { sessionUser: req.session.user });
-})
+});
 
-router.get('/search-bars', goToLoginPage,(req, res) => {
-    return res.render('./functionality/search-bars.ejs', { gMapsApiKey : gmapsApiKey, sessionUser: req.session.user });
-})
+router.get('/search-bars', goToLoginPage, (req, res) => {
+    return res.render('./functionality/search-bars.ejs', { gMapsApiKey: gmapsApiKey, sessionUser: req.session.user });
+});
 
 router.get('/search-bars:barId', goToLoginPage, (req, res) => {
-    return res.render('./functionality/search-bars.ejs',{gMapsApiKey : gmapsApiKey, sessionUser: req.session.user});
-})
+    return res.render('./functionality/search-bars.ejs', { gMapsApiKey: gmapsApiKey, sessionUser: req.session.user });
+});
 
 router.get('/rating', goToLoginPage, (req, res) => {
     return res.render('./functionality/rating.ejs', { sessionUser: req.session.user });
-})
+});
 
-router.post('/add-rating', goToLoginPage, async(req, res) => { 
+router.post('/add-rating', goToLoginPage, async (req, res) => {
 
     const { userID, beerID, rating } = req.body;
     console.log(userID, beerID, rating);
@@ -44,16 +44,15 @@ router.post('/add-rating', goToLoginPage, async(req, res) => {
 
         return res.send(createRating);
 
-    } else { 
+    } else {
         return res.send({});
     }
 
-
-})
+});
 
 router.get('/chat', goToLoginPage, (req, res) => {
     return res.render('./functionality/chat.ejs', { sessionUser: req.session.user });
-})
+});
 
 
 module.exports = router;

@@ -1,8 +1,6 @@
 <!-- css -->
 <link rel="stylesheet" type="text/css" href="./global/chat.css">
 
-<script src="./global/chat.js"></script>
-
 <div class="chat">
     <button class="btn btn-warning open-button" onclick="displayForm()">Chat <i class="fas fa-comments"></i></button>
     <div class="chat-popup" id="myForm">
@@ -26,12 +24,12 @@
 
 <script src="socket.io/socket.io.js"></script>
 <script>
+
     const socket = io.connect("localhost:3000");
 
     $('#submit').click(() => {
         const message = $('#message').val();
         const username = user;
-        console.log(username);
         $('#message').val('');
         socket.emit(`a client wrote this`, { message, username });
     });
@@ -39,19 +37,19 @@
     socket.on('A client said', data => {
         $('#conversation').append(`<div>${data.username}: ${data.message}</div>`);
     });
+
 </script>
 <script>
-    let open = false
+    let open = false;
     function displayForm() {
         if(!open){
             document.getElementById("myForm").style.display = "block";
-            open = true
+            open = true;
         }
         else{
             document.getElementById("myForm").style.display = "none";
-            open = false
+            open = false;
         }
-            
         
     }
     

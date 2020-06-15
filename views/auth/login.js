@@ -5,8 +5,6 @@ if (queryString){
 
 function validateLogin() {
 
-    console.log("validate login...")
-
     const username = document.forms.loginform.username.value;
     const password = document.forms.loginform.password.value;
 

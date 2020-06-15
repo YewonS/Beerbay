@@ -1,6 +1,7 @@
 $(document).ready(function () {
 
     // get ratings of the user
+
     $.ajax({
         url: `/api/ratings/user/username/` + user,
         type: 'GET'
@@ -12,7 +13,7 @@ $(document).ready(function () {
             let rating = ratings[i];
 
             $('.ratings-tbody').append(`<tr class="result-row">
-                                                <th scope="row">${i+1}</th>
+                                                <th scope="row">${i + 1}</th>
                                                 <td>${rating.beername}</td>
                                                 <td>${rating.brewery}</td>
                                                 <td>${rating.country}</td>
@@ -20,13 +21,14 @@ $(document).ready(function () {
                                                 <td>${rating.category}</td>
                                                 <td>${rating.ratings}</td>
                                             </tr>
-                `);
+            `);
         }
 
     }).fail(() => {
         alert("No ratings of the user found.");
-    })
+    });
     
+
     // add ratings
 
     let beerID;
@@ -44,11 +46,13 @@ $(document).ready(function () {
         
         }).fail(() => {
             alert("Please type in correct name of the beer.");
-        })
+        });
 
     });
 
     let rating;
+
+    // starts change colors when clicked
 
     $('#s1').on('click', function () {
         $('.fa-star').css("color", "gray");
@@ -81,7 +85,7 @@ $(document).ready(function () {
         rating = Number(rating);
         addRating(beerID, rating);
 
-    })
+    });
     
 
 
@@ -91,46 +95,43 @@ $(document).ready(function () {
             url: `/api/username/` + user,
             type: 'GET'
         }).done(data => {
-            const user = data.response; 
+            const user = data.response;
             const userID = user[0].id;
 
-            if(userID && beerID && rating) {
+            if (userID && beerID && rating) {
         
-                    const ratingData = {
-                        userID: userID,
-                        beerID: beerID,
-                        rating: rating
-                    }
+                const ratingData = {
+                    userID: userID,
+                    beerID: beerID,
+                    rating: rating
+                }
         
-                    $.ajax({
-                        url: `/add-rating`,
-                        type: "POST",
-                        dataType: "json",
-                        data: JSON.stringify(ratingData),
-                        contentType: "application/json; charset=utf-8"
-                    }).done((data) => { 
+                $.ajax({
+                    url: `/add-rating`,
+                    type: "POST",
+                    dataType: "json",
+                    data: JSON.stringify(ratingData),
+                    contentType: "application/json; charset=utf-8"
+                }).done((data) => {
 
-        
-                        console.log("New rating added", data);
-                        setTimeout(function(){ $('#ratings-modal').modal('hide');},100);
-                        alert("New rating added");
+                    console.log("New rating added", data);
+                    setTimeout(function () {
+                        $('#ratings-modal').modal('hide');
+                    }, 100);
+                    alert("New rating added");
                      
-
-                        
-                    }).fail(() => { //TODO: it adds the data into db. But it throws fail. what the hell is wrong?!
-                        alert("Error happened while adding rating. Please try again.");
-                    })
+                }).fail(() => {
+                    alert("Error happened while adding rating. Please try again.");
+                });
         
                     
-                } else {
-                    alert("Information wrong.");
-                }
+            } else {
+                alert("Information wrong.");
+            }
 
-
-            }).fail(() => { 
-                
-            })
-
+        }).fail((error) => {
+            console.log(error);
+        });
 
     }
     

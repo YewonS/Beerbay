@@ -1,4 +1,4 @@
-$(document).ready(function() {
+$(document).ready(function () {
 
     function displayBeers(i, beer) {
         
@@ -26,7 +26,7 @@ $(document).ready(function() {
     
     });
 
-    $('.btn-warning').on('click', function() {
+    $('.btn-warning').on('click', function () {
         
         let beername = $('#search-beername').val();
         let category = $('#category').val();
@@ -34,7 +34,7 @@ $(document).ready(function() {
         // when the user searches with the beername and category
         if (beername && category) {
             $.ajax({
-                url:'/api/beername/' + beername + '/category/' + category,
+                url: '/api/beername/' + beername + '/category/' + category,
                 type: 'GET'
             }).done(data => {
                 const beer = data.response;
@@ -43,9 +43,9 @@ $(document).ready(function() {
                 
             }).fail(() => {
                 alert("No beer of the name and category found.");
-            })
+            });
 
-        // when the user searches only with the beername 
+            // when the user searches only with the beername 
         } else if (beername) {
             $.ajax({
                 url: `/api/beers/name/` + beername,
@@ -61,7 +61,7 @@ $(document).ready(function() {
                 alert("No beer with the matching name found.");
             });
 
-        // when the user searches only with the category   
+            // when the user searches only with the category   
         } else if (category) {
             $.ajax({
                 url: `/api/beers/category/` + category,
@@ -77,7 +77,7 @@ $(document).ready(function() {
                 alert("No beer with the matching category found.");
             });
 
-        // when there are no search input, just show all the beers
+            // when there are no search input, just show all the beers
         } else {
 
             $.ajax({
@@ -91,11 +91,11 @@ $(document).ready(function() {
                 }
             }).fail(() => {
                 alert("No beer found.");
-            })
+            });
            
         }
     
-    })
+    });
   
 
-})
+});
