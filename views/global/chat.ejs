@@ -4,16 +4,16 @@
 <script src="./global/chat.js"></script>
 
 <div class="chat">
-    <button class="btn btn-warning open-button" onclick="displayForm()">Chat</button>
+    <button class="btn btn-warning open-button" onclick="displayForm()">Chat <i class="fas fa-comments"></i></button>
     <div class="chat-popup" id="myForm">
         <form class="form-container"></form>
 
-            <h1>Chat</h1>
+            <h1 id="chat-header">Chat <i class="far fa-comment"></i></h1>
             <div id="conversation"></div>
         
             <div class="fixedBottom input-group-prepend">
                 <input class="form-control" id="message" placeholder="Type message.." name="msg" required></input>
-                <button class="btn btn-outline-secondary" id="submit" >Send</button>
+                <button class="btn btn-outline-secondary" id="submit">Send</button>
             </div>
         </div>
     </div>

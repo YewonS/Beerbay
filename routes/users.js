@@ -10,6 +10,17 @@ const goToLoginPage = (req, res, next) => {
     }
 }
 
+router.get('/api/username/:username', goToLoginPage, async (req, res) => { 
+    const username = req.params.username;
+    const userFound = await User.query().select('users.id').where({ 'username': username });
+    if (userFound.length > 0) {
+        return res.send({ response: userFound });
+    } else {
+        return res.status(400).send({ response: "User with the username not found." });
+    }
+
+})
+
 router.get('/api/ratings/user/username/:username', goToLoginPage, async(req, res) => {
     const username = req.params.username;
     const userFound = await User.query().select('users.username', 'ratings.*', 'beers.*', 'categories.category')

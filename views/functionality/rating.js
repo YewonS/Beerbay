@@ -88,10 +88,10 @@ $(document).ready(function () {
     function addRating(beerID, rating) {
 
         $.ajax({
-            url: `/api/user/username/` + user,
+            url: `/api/username/` + user,
             type: 'GET'
         }).done(data => {
-            const user = data.response;
+            const user = data.response; 
             const userID = user[0].id;
 
             if(userID && beerID && rating) {
@@ -128,7 +128,7 @@ $(document).ready(function () {
 
 
             }).fail(() => { 
-                alert("Please log in to add a new rating.");
+                
             })
 
 
