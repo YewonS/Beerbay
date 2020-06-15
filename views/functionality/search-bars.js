@@ -13,7 +13,7 @@ function initMap() {
     const cph = { lat: 55.676098, lng: 12.568337 };
     map = new google.maps.Map(document.getElementById('map'), {
         center: cph,
-        zoom: 11
+        zoom: 13
     });
 
 }

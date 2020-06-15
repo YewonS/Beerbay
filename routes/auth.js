@@ -10,7 +10,7 @@ const saltRounds = 12;
 
 const goToHomePage = (req, res, next) => {
     if (req.session.user) {
-        res.redirect('/');
+        res.redirect('/home');
     } else {
         next();
     }
@@ -49,7 +49,6 @@ router.post('/signup', async (req, res) => {
             const userFound = await User.query().select().where({ 'username': username }).limit(1);
             if (userFound.length > 0) {
 
-                alert("Username already exits.");
                 return res.redirect('/signup');
             } else {
                 const hashedPassword = await bcrypt.hash(password, saltRounds);
