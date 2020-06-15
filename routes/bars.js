@@ -18,16 +18,5 @@ router.get('/api/bars/name/:name', async(req, res) => {
 
 })
 
-router.get('/api/bars/address/:address', async(req, res) => {
-    const address = req.params.address;
-    const barFound = await Bar.query().select().where({ 'address': address }).limit(1);
-    if (barFound.length > 0) {
-        return res.send({ response: barFound });
-    } else {
-        return res.status(400).send({ response: "No bar of the address found."});
-    }
-
-})
-
 
 module.exports = router;

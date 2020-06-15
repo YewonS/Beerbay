@@ -30,17 +30,6 @@ router.get('/api/beers/name/:beername', async(req, res) => {
     }
 })
 
-router.get('/api/beers/brewery/:brewery', async(req, res) => {
-    const brewery = req.params.brewery;
-    const breweryBeers = await Beer.query().select().where({ 'brewery': brewery });
-    if (breweryBeers.length > 0) {
-        return res.send({ response: breweryBeers });
-    } else {
-        return res.status(400).send({ response: "No beers of the brewery has found." });
-    }
-
-})
-
 router.get('/api/beername/:beername/category/:category', async(req, res) => {
     const beername = req.params.beername;
     const category = req.params.category;
