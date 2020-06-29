@@ -7,6 +7,14 @@ const User = require('../models/User.js');
 const bcrypt = require('bcrypt');
 const saltRounds = 12;
 
+/* Add html files */
+
+const fs = require('fs');
+const header = fs.readFileSync("./views/global/header.html", "utf8");
+const navbarIndex = fs.readFileSync("./views/global/navbarIndex.html", "utf8");
+const footer = fs.readFileSync("./views/global/footer.html", "utf8");
+const signup = fs.readFileSync("./views/auth/signup.html", "utf8");
+const login = fs.readFileSync("./views/auth/login.html", "utf8");
 
 const goToHomePage = (req, res, next) => {
     if (req.session.user) {
@@ -17,14 +25,16 @@ const goToHomePage = (req, res, next) => {
 }
 
 router.get('/signup', goToHomePage, (req, res) => {
-    return res.render('./auth/signup.ejs');
+    return res.send(header + navbarIndex + signup + footer);
+    // return res.render('./auth/signup.ejs');
 })
 
 router.get('/login', goToHomePage, (req, res) => {
     console.log('session:', req.sessionID);
     console.log('user:', req.session.user);
  
-    return res.render('./auth/login.ejs');
+    return res.send(header + navbarIndex + login + footer);
+    // return res.render('./auth/login.ejs');
 })
 
 

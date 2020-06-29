@@ -6,14 +6,12 @@ app.use(express.urlencoded({ extended: false }));
 
 app.use(express.static("views"));
 
-app.set('view engine', 'ejs');
-const ejs = require('ejs');
-
 /* Socket.io*/
 
 const server = require("http").createServer(app);
 const io = require("socket.io")(server);
 
+ 
 const escape = require('escape-html');
 
 io.on('connection', socket => {
@@ -69,6 +67,7 @@ const barRoute = require('./routes/bars.js');
 const collectionRoute = require('./routes/collections.js');
 const authRoute = require('./routes/auth.js');
 const functionRoute = require('./routes/functionality.js');
+const sessionRoute = require('./routes/session.js');
 app.use(beerRoute);
 app.use(userRoute);
 app.use(categoryRoute);
@@ -77,7 +76,18 @@ app.use(barRoute);
 app.use(collectionRoute);
 app.use(authRoute);
 app.use(functionRoute);
+app.use(sessionRoute);
 
+/* Add html files */
+
+const fs = require('fs');
+const navbarIndex = fs.readFileSync("./views/global/navbarIndex.html", "utf8");
+const navbarHome = fs.readFileSync("./views/global/navbarHome.html", "utf8");
+const chat = fs.readFileSync("./views/global/chat.html", "utf8");
+const header = fs.readFileSync("./views/global/header.html", "utf8");
+const footer = fs.readFileSync("./views/global/footer.html", "utf8");
+const main = fs.readFileSync("./views/global/main.html", "utf8");
+const home = fs.readFileSync("./views/global/home.html", "utf8");
 
 const goToLoginPage = (req, res, next) => {
     if (!req.session.user) {
@@ -99,14 +109,18 @@ app.get('/', goToHomePage, (req, res) => {
     console.log("session: ", req.sessionID);
     console.log("user: ", req.session.user);
 
-    return res.render('./global/main.ejs', { sessionUser: req.session.user });
+    return res.send(header + navbarIndex + main + footer);
+
+    // return res.render('./global/main.ejs', { sessionUser: req.session.user });
 })
 
 app.get('/home', goToLoginPage, (req, res) => {
     console.log("session: ", req.sessionID);
     console.log("user: ", req.session.user);
 
-    return res.render('./global/home.ejs', { sessionUser: req.session.user });
+    return res.send(header + navbarHome + home + chat + footer)
+
+    // return res.render('./global/home.ejs', { sessionUser: req.session.user });
 })
 
 
