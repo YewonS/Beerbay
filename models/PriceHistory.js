@@ -1,6 +1,7 @@
 const { Model } = require('objection');
 
 const Stock = require('./Stock.js');
+const OrderItem = require('./OrderItem.js');
 
 class PriceHistory extends Model {
     static tableName = 'price_history';
