@@ -8,7 +8,7 @@ class OrderItem extends Model {
 
     static relationMappings = {
         price_history: {
-            relation: Model.HasManyRelation,
+            relation: Model.BelongsToOneRelation,
             ModelClass: PriceHistory,
             join: {
                 from: 'order_item.price_history',
@@ -16,7 +16,7 @@ class OrderItem extends Model {
             }
         },
         order: {
-            relation: Model.HasManyRelation,
+            relation: Model.BelongsToOneRelation,
             ModelClass: Order,
             join: {
                 from: 'order_item.order',

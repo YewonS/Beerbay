@@ -7,7 +7,7 @@ class OrderStatus extends Model {
 
     static relationMappings = {
         order: {
-            relation: Model.BelongsToOneRelation,
+            relation: Model.HasManyRelation,
             ModelClass: Order,
             join: {
                 from: 'order_status.id',

@@ -9,7 +9,7 @@ class Order extends Model {
 
     static relationMappings = {
         order_item: {
-            relation: Model.BelongsToOneRelation,
+            relation: Model.HasManyRelation,
             ModelClass: OrderItem,
             join: {
                 from: 'order.id',
@@ -17,7 +17,7 @@ class Order extends Model {
             }
         },
         user: {
-            relation: Model.HasManyRelation,
+            relation: Model.BelongsToOneRelation,
             ModelClass: User,
             join: {
                 from: 'order.user',
@@ -25,7 +25,7 @@ class Order extends Model {
             }
         },
         order_status: {
-            relation: Model.HasManyRelation,
+            relation: Model.BelongsToOneRelation,
             ModelClass: OrderStatus,
             join: {
                 from: 'order.status',

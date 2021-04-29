@@ -7,7 +7,7 @@ class Shop extends Model {
 
     static relationMappings = {
         stock: {
-        relation: Model.BelongsToOneRelation,
+        relation: Model.HasManyRelation,
             modelClass: Stock,
             join:{
                 from: 'shop.id',
