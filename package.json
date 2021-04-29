@@ -1,5 +1,5 @@
 {
-  "name": "beergency",
+  "name": "beerbay",
   "version": "1.0.0",
   "description": "",
   "main": "app.js",
@@ -16,14 +16,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/YewonS/Beergency.git"
+    "url": "git+https://github.com/YewonS/Beerbay.git"
   },
   "author": "YewonS",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/YewonS/Beergency/issues"
+    "url": "https://github.com/YewonS/Beerbay/issues"
   },
-  "homepage": "https://github.com/YewonS/Beergency#readme",
+  "homepage": "https://github.com/YewonS/Beerbay#readme",
   "dependencies": {
     "bcrypt": "^4.0.1",
     "cross-env": "^7.0.2",

@@ -17,13 +17,13 @@ router.get('/search-beers', goToLoginPage, (req, res) => {
     return res.render('./functionality/search-beers.ejs', { sessionUser: req.session.user });
 });
 
-router.get('/search-bars', goToLoginPage, (req, res) => {
-    return res.render('./functionality/search-bars.ejs', { gMapsApiKey: gmapsApiKey, sessionUser: req.session.user });
-});
+// router.get('/search-bars', goToLoginPage, (req, res) => {
+//     return res.render('./functionality/search-bars.ejs', { gMapsApiKey: gmapsApiKey, sessionUser: req.session.user });
+// });
 
-router.get('/search-bars:barId', goToLoginPage, (req, res) => {
-    return res.render('./functionality/search-bars.ejs', { gMapsApiKey: gmapsApiKey, sessionUser: req.session.user });
-});
+// router.get('/search-bars:barId', goToLoginPage, (req, res) => {
+//     return res.render('./functionality/search-bars.ejs', { gMapsApiKey: gmapsApiKey, sessionUser: req.session.user });
+// });
 
 router.get('/rating', goToLoginPage, (req, res) => {
     return res.render('./functionality/rating.ejs', { sessionUser: req.session.user });
