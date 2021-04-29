@@ -3,15 +3,15 @@ const { Model } = require('objection');
 const User = require('./User.js');
 const Beer = require('./Beer.js');
 
-class Rating extends Model {
-    static tableName = 'ratings';
+class Review extends Model {
+    static tableName = 'review';
 
     static relationMappings = {
         user: {
             relation: Model.BelongsToOneRelation,
             modelClass: User,
             join: {
-                from: 'ratings.userId',
+                from: 'review.userId',
                 to: 'users.id'
             }
         },
@@ -19,7 +19,7 @@ class Rating extends Model {
             relation: Model.BelongsToOneRelation,
             modelClass: Beer,
             join: {
-                from: 'ratings.beerId',
+                from: 'review.beerId',
                 to: 'beers.id'
             }
         }
@@ -27,4 +27,4 @@ class Rating extends Model {
 
 }
 
-module.exports = Rating;
+module.exports = Review;
