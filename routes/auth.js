@@ -44,7 +44,7 @@ router.post('/signup', async (req, res) => {
 
             try {
                 
-                const userFound = await User.query().select().where({ 'username': username }).limit(1);
+                const userFound = await User.query().select().where({ 'name': username }).limit(1);
                 const emailFound = await User.query().select().where({ 'email': email }).limit(1);
 
                 if (userFound.length > 0 || emailFound.length > 0) {
@@ -55,7 +55,7 @@ router.post('/signup', async (req, res) => {
 
                     const hashedPassword = await bcrypt.hash(password, saltRounds);
                     const createdUser = await User.query().insert({
-                        username,
+                        name: username,
                         email,
                         password: hashedPassword
                     });
