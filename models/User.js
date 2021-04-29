@@ -1,19 +1,28 @@
 const { Model } = require('objection');
 
-const Rating = require('./Rating.js');
+const Review = require('./Review.js');
+const Order = require('./Order.js');
 
 class User extends Model {
-    static tableName = 'users';
+    static tableName = 'user';
 
     static relationMappings = {
-        rating: {
+        review: {
             relation: Model.HasManyRelation,
-            modelClass: Rating,
+            modelClass: Review,
             join: {
-                from: 'users.id',
-                to: 'ratings.userId'
+                from: 'user.id',
+                to: 'review.user'
             }
 
+        },
+        order: {
+            relation: Model.HasManyRelation,
+            modelClass: Order,
+            join: {
+                from: 'user.id',
+                to: 'order.user'
+            }
         }
     }
 
