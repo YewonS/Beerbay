@@ -1,3 +1,9 @@
+console.log(window.location.href)
+
+if(window.location.href.includes("error")){
+    alert("Username or Email already exist");
+}
+
 function validateUser() {
 
     const username = document.forms.signupform.username.value;
