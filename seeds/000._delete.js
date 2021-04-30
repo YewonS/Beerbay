@@ -1,21 +1,12 @@
 
 exports.seed = function(knex) {
-  
-  return knex('collections').del()
-    .then(() => {
-      return knex('bars').del();
-    })
-    .then(() => {
-      return knex('ratings').del();
-    })
-    .then(() => {
-      return knex('users').del();
-    })
-    .then(() => {
-      return knex('beers').del();
-    })
-    .then(() => {
-      return knex('categories').del();
-    });
 
+  //We delete the developer emails so we can keep using them for testing
+  
+  return knex('user').where({email: "danilaalbertthefirst@gmail.com"}).del()
+    .then(() => {
+      return knex('user').where({email: "fuckoff@maxc.in"}).del();
+    }).then(() => {
+      return knex('user').where({email: "maillard.theo@gmail.com"}).del();
+    });
 };
