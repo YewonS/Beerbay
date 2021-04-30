@@ -3,7 +3,7 @@ const router = require('express').Router();
 const credentials = require('../config/apiConfig.js');
 const gmapsApiKey = credentials.gmapsApiKey
 
-const Rating = require('../models/Rating.js');
+const Rating = require('../models/Review.js');
 
 const goToLoginPage = (req, res, next) => {
     if (!req.session.user) {
@@ -17,13 +17,10 @@ router.get('/search-beers', goToLoginPage, (req, res) => {
     return res.render('./functionality/search-beers.ejs', { sessionUser: req.session.user });
 });
 
-// router.get('/search-bars', goToLoginPage, (req, res) => {
-//     return res.render('./functionality/search-bars.ejs', { gMapsApiKey: gmapsApiKey, sessionUser: req.session.user });
-// });
+router.get('/search-bars', goToLoginPage, (req, res) => {
+    return res.render('./functionality/search-bars.ejs', { gMapsApiKey: gmapsApiKey, sessionUser: req.session.user });
+});
 
-// router.get('/search-bars:barId', goToLoginPage, (req, res) => {
-//     return res.render('./functionality/search-bars.ejs', { gMapsApiKey: gmapsApiKey, sessionUser: req.session.user });
-// });
 
 router.get('/rating', goToLoginPage, (req, res) => {
     return res.render('./functionality/rating.ejs', { sessionUser: req.session.user });

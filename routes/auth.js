@@ -43,10 +43,9 @@ router.post('/signup', async (req, res) => {
         } else {
 
             try {
-                
                 const userFound = await User.query().select().where({ 'name': username }).limit(1);
                 const emailFound = await User.query().select().where({ 'email': email }).limit(1);
-
+         
                 if (userFound.length > 0 || emailFound.length > 0) {
 
                     return res.redirect('/signup?error');
@@ -65,7 +64,7 @@ router.post('/signup', async (req, res) => {
                 }
 
             } catch (error) {
-                return res.status(500).send({ response: "Something went wrong with the database." });
+                return res.status(500).send({ response: "Something went wrong with the database.", error });
             }
         }
     } else if (password && passwordRepeat && !isPasswordTheSame) {

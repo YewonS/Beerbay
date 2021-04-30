@@ -61,22 +61,22 @@ Model.knex(knex);
 
 
 /* Add routes */
-const beerRoute = require('./routes/beers.js');
-const userRoute = require('./routes/users.js');
-const categoryRoute = require('./routes/categories.js');
-const ratingRoute = require('./routes/ratings.js');
-const shopRoute = require('./routes/shops.js');
-const collectionRoute = require('./routes/collections.js');
-const authRoute = require('./routes/auth.js');
+// const beerRoute = require('./routes/beers.js');
+// const userRoute = require('./routes/users.js');
+// const categoryRoute = require('./routes/categories.js');
+// const ratingRoute = require('./routes/ratings.js');
+// const shopRoute = require('./routes/shops.js');
+// const collectionRoute = require('./routes/collections.js');
 const functionRoute = require('./routes/functionality.js');
-app.use(beerRoute);
-app.use(userRoute);
-app.use(categoryRoute);
-app.use(ratingRoute);
-app.use(barRoute);
-app.use(collectionRoute);
-app.use(authRoute);
+const authRoute = require('./routes/auth.js');
+// app.use(beerRoute);
+// app.use(userRoute);
+// app.use(categoryRoute);
+// app.use(ratingRoute);
+// app.use(barRoute);
+// app.use(collectionRoute);
 app.use(functionRoute);
+app.use(authRoute);
 
 
 const goToLoginPage = (req, res, next) => {
