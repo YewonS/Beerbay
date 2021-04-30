@@ -21,6 +21,14 @@ router.get('/search-bars', goToLoginPage, (req, res) => {
     return res.render('./functionality/search-bars.ejs', { gMapsApiKey: gmapsApiKey, sessionUser: req.session.user });
 });
 
+router.get('/cart', goToLoginPage, (req, res) => {
+    return res.render('./functionality/cart.ejs', {sessionUser: req.session.user});
+});
+
+router.get('/order-history', goToLoginPage, (req, res) => {
+    return res.render('./functionality/order-history.ejs', {sessionUser: req.session.user});
+});
+
 
 router.get('/rating', goToLoginPage, (req, res) => {
     return res.render('./functionality/rating.ejs', { sessionUser: req.session.user });
