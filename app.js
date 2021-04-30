@@ -61,20 +61,20 @@ Model.knex(knex);
 
 
 /* Add routes */
-// const beerRoute = require('./routes/beers.js');
-// const userRoute = require('./routes/users.js');
-// const categoryRoute = require('./routes/categories.js');
-// const ratingRoute = require('./routes/ratings.js');
-// const shopRoute = require('./routes/shops.js');
-// const collectionRoute = require('./routes/collections.js');
+const beerRoute = require('./routes/beers.js');
+const userRoute = require('./routes/users.js');
+const categoryRoute = require('./routes/categories.js');
+const reviewRoute = require('./routes/reviews.js');
+const shopRoute = require('./routes/shops.js');
+const stockRoute = require('./routes/stocks.js');
 const functionRoute = require('./routes/functionality.js');
 const authRoute = require('./routes/auth.js');
-// app.use(beerRoute);
-// app.use(userRoute);
-// app.use(categoryRoute);
-// app.use(ratingRoute);
-// app.use(barRoute);
-// app.use(collectionRoute);
+app.use(beerRoute);
+app.use(userRoute);
+app.use(categoryRoute);
+app.use(reviewRoute);
+app.use(shopRoute);
+app.use(stockRoute);
 app.use(functionRoute);
 app.use(authRoute);
 

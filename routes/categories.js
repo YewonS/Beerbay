@@ -9,7 +9,7 @@ router.get('/api/categories', async (req, res) => {
 
 router.get('/api/categories/:id', async (req, res) => {
     const id = req.params.id;
-    const categoryFound = await Category.query().select('category').where({ 'id': id }).limit(1);
+    const categoryFound = await Category.query().select('name').where({ 'id': id }).limit(1);
     if (categoryFound.length > 0) {
         return res.send({ response: categoryFound });
     } else {
@@ -19,7 +19,7 @@ router.get('/api/categories/:id', async (req, res) => {
 
 router.get('/api/categories/name/:categoryName', async (req, res) => {
     const categoryName = req.params.categoryName;
-    const categoryFound = await Category.query().select('id').where({ 'category': categoryName }).limit(1);
+    const categoryFound = await Category.query().select('id').where({ 'name': categoryName }).limit(1);
     if (categoryFound.length > 0) {
         return res.send({ response: categoryFound });
     } else {

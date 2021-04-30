@@ -81,11 +81,11 @@ router.post("/login", async (req, res) => {
 
     if (username && password) {
         try {
-            User.query().select('username').where({ 'username': username }).then( async userFound => {
+            User.query().select('name').where({ 'name': username }).then( async userFound => {
                 if (userFound.length == 0) {
                     return res.redirect("/login?error");
                 } else {
-                    const matchingPassword = await User.query().select('password').where({ 'username': username }).limit(1);
+                    const matchingPassword = await User.query().select('password').where({ 'name': username }).limit(1);
                     const passwordToValidate = matchingPassword[0].password;
 
                     bcrypt.compare(password, passwordToValidate).then((result) => {

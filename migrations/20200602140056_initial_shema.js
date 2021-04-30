@@ -11,8 +11,8 @@ exports.up = function(knex) {
             table.double('abv');
             table.string('picture');
             
-            table.integer('category_id');
-            table.foreign('category_id').references('category.id');
+            table.integer('category');
+            table.foreign('category').references('category.id');
         })
         .createTable('order_status', (table) => {
             table.increments('id').unique().primary();

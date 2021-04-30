@@ -13,7 +13,7 @@ router.get('/api/shops/name/:name', async (req, res) => {
     if (shopsFound.length > 0) {
         return res.send({ response: shopsFound });
     } else {
-        return res.status(400).send({ response: "No bar of the name found." });
+        return res.status(400).send({ response: "No shop of the name found." });
     }
 
 });
