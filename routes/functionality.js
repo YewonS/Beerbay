@@ -1,9 +1,9 @@
 const router = require('express').Router();
 
 const credentials = require('../config/apiConfig.js');
-const gmapsApiKey = credentials.gmapsApiKey
+const gmapsApiKey = credentials.gmapsApiKey;
 
-const Rating = require('../models/Rating.js');
+const Review = require('../models/Review.js');
 
 const goToLoginPage = (req, res, next) => {
     if (!req.session.user) {
@@ -21,9 +21,6 @@ router.get('/search-bars', goToLoginPage, (req, res) => {
     return res.render('./functionality/search-bars.ejs', { gMapsApiKey: gmapsApiKey, sessionUser: req.session.user });
 });
 
-router.get('/search-bars:barId', goToLoginPage, (req, res) => {
-    return res.render('./functionality/search-bars.ejs', { gMapsApiKey: gmapsApiKey, sessionUser: req.session.user });
-});
 
 router.get('/rating', goToLoginPage, (req, res) => {
     return res.render('./functionality/rating.ejs', { sessionUser: req.session.user });
@@ -36,13 +33,13 @@ router.post('/add-rating', goToLoginPage, async (req, res) => {
 
     if (userID && beerID && rating) {
 
-        const createRating = await Rating.query().insert({
-            ratings: rating,
-            beerId: beerID,
-            userId: userID
+        const createReview = await Review.query().insert({
+            rating,
+            beer: beerID,
+            user: userID
         });
 
-        return res.send(createRating);
+        return res.send(createReview);
 
     } else {
         return res.send({});

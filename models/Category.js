@@ -3,14 +3,14 @@ const { Model } = require('objection');
 const Beer = require('./Beer.js');
 
 class Category extends Model {
-    static tableName = 'categories';
+    static tableName = 'category';
 
     static relationMappings = {
         beer: {
             relation: Model.HasManyRelation,
             modelClass: Beer,
             join: {
-                from: 'categories.id',
+                from: 'category.id',
                 to: 'beers.categoryId'
             }
 

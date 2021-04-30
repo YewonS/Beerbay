@@ -1,5 +1,5 @@
 apiConfig.js
-rdsCredentials.js
+dbCredentials.js
 configSession.json
 
 

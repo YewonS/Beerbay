@@ -12,7 +12,7 @@ const goToLoginPage = (req, res, next) => {
 
 router.get('/api/username/:username', goToLoginPage, async (req, res) => {
     const username = req.params.username;
-    const userFound = await User.query().select('users.id').where({ 'username': username });
+    const userFound = await User.query().select('user.id').where({ 'name': username });
     if (userFound.length > 0) {
         return res.send({ response: userFound });
     } else {
@@ -21,11 +21,13 @@ router.get('/api/username/:username', goToLoginPage, async (req, res) => {
 
 });
 
-router.get('/api/ratings/user/username/:username', goToLoginPage, async (req, res) => {
+router.get('/api/reviews/user/username/:username', goToLoginPage, async (req, res) => {
     const username = req.params.username;
-    const userFound = await User.query().select('users.username', 'ratings.*', 'beers.*', 'categories.category')
-        .where({ 'username': username })
-        .join('ratings', 'users.id', '=', 'ratings.user_id').join('beers', 'ratings.beer_id', '=', 'beers.id').join('categories', 'beers.category_id', '=', 'categories.id');
+    const userFound = await User.query().select('user.name', 'review.*', 'beer.*', 'category.name')
+        .where({ 'user.name': username })
+        .join('review', 'user.id', '=', 'review.user')
+        .join('beer', 'review.beer', '=', 'beer.id')
+        .join('category', 'beer.category', '=', 'category.id');
     if (userFound.length > 0) {
         return res.send({ response: userFound });
     } else {

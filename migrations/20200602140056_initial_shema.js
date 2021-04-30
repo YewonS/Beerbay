@@ -1,66 +1,101 @@
 exports.up = function(knex) {
   
     return knex.schema
-        .createTable('categories', (table) => {
-            table.integer('id').unique().notNullable();
-            table.string('category').unique().notNullable();
+        .createTable('category', (table) => {
+            table.increments('id').unique().primary();
+            table.string('name');
         })
-        .createTable('beers', (table) => {
-            table.integer('id').unique().notNullable();
-            table.string('beername').notNullable();
-            table.string('brewery');
-            table.string('country');
+        .createTable('beer', (table) => {
+            table.increments('id').unique().primary();
+            table.string('beername');
             table.double('abv');
             table.string('picture');
             
-            table.integer('category_id').notNullable();
-            table.foreign('category_id').references('categories.id');
+            table.integer('category');
+            table.foreign('category').references('category.id');
         })
-        .createTable('users', (table) => {
-            table.increments('id').notNullable();
-            table.string('username').unique().notNullable();
-            table.string('email').unique().notNullable();
-            table.string('password').notNullable();
-            
-            table.dateTime('updated_at').defaultTo(knex.raw('NULL ON UPDATE CURRENT_TIMESTAMP'));
-            table.dateTime('created_at').notNullable().defaultTo(knex.raw('CURRENT_TIMESTAMP'));
+        .createTable('order_status', (table) => {
+            table.increments('id').unique().primary();
+            table.string('name');
         })
-        .createTable('ratings', (table) => {
-            table.increments('id').notNullable();
-            table.integer('ratings');
-
-            table.integer('beer_id').notNullable();
-            table.foreign('beer_id').references('beers.id');
-
-            table.integer('user_id').unsigned().notNullable();
-            table.foreign('user_id').references('users.id');
-        })
-        .createTable('bars', (table) => {
-            table.increments('id').notNullable();
+        .createTable('shop', (table) => {
+            table.increments('id').unique().primary();
             table.string('name').notNullable();
             table.string('address').notNullable();
-            table.double('latitude').notNullable();
-            table.double('longitude').notNullable();
         })
-        .createTable('collections', (table) => {
-            table.increments('id').notNullable();
-            
-            table.integer('beer_id').notNullable();
-            table.foreign('beer_id').references('beers.id');
+        .createTable('stock', (table) => {
+            table.integer('shop').notNullable();
+            table.foreign('shop').references('shop.id');
 
-            table.integer('bar_id').unsigned().notNullable();
-            table.foreign('bar_id').references('bars.id');
+            table.integer('beer').notNullable();
+            table.foreign('beer').references('beer.id');
+
+            table.integer('amount').notNullable();
+
+            table.primary(['shop', 'beer']);
+        })
+        .createTable('price_history', (table) => {
+            table.increments('id').unique().primary();
+            table.integer('beer');
+            table.foreign('beer').references('stock.beer');
+
+            table.integer('shop');
+            table.foreign('shop').references('stock.shop');
+
+            table.integer('price');
+            table.dateTime('start_date').defaultTo(knex.raw('CURRENT_TIMESTAMP'));
+        })
+        .createTable('user', (table) => {
+            table.increments('id').unique().primary();
+            table.string('name');
+            table.string('email').unique().notNullable();
+            table.string('password').notNullable();            
+        })
+        .createTable('order', (table) => {
+            table.increments('id').unique().primary();
+            table.integer('status');
+            table.foreign('status').references('order_status.id');
+
+            table.integer('user');
+            table.foreign('user').references('user.id');
+        })
+        .createTable('order_item', (table) => {
+            table.integer('order').notNullable();
+            table.foreign('order').references('order.id');
+
+            table.integer('price_history').notNullable();
+            table.foreign('price_history').references('price_history.id');
+
+            table.integer('amount').notNullable();
+
+            table.primary(['order', 'price_history']);
+        })
+        .createTable('review', (table) => {
+            table.increments('id').unique().primary();
+
+            table.integer('beer').notNullable();
+            table.foreign('beer').references('beer.id');
+            
+            table.integer('rating');
+
+            table.integer('user');
+            table.foreign('user').references('user.id');
         });
+        
 
 };
 
 exports.down = function(knex) {
     return knex.schema
-        .dropTableIfExists('collections')
-        .dropTableIfExists('bars')
-        .dropTableIfExists('ratings')
-        .dropTableIfExists('users')
-        .dropTableIfExists('beers')
-        .dropTableIfExists('categories');
+        .dropTableIfExists('review')
+        .dropTableIfExists('order_item')
+        .dropTableIfExists('order')
+        .dropTableIfExists('user')
+        .dropTableIfExists('price_history')
+        .dropTableIfExists('stock')
+        .dropTableIfExists('shop')
+        .dropTableIfExists('order_status')
+        .dropTableIfExists('beer')
+        .dropTableIfExists('category');
 };
       

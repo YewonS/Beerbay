@@ -1,10 +1,10 @@
-const credentials = require('./config/rdsCredentials.js');
+const credentials = require('./config/dbCredentials.js');
 const { knexSnakeCaseMappers } = require('objection');
 
 module.exports = {
 
     development: {
-        client: 'mysql',
+        client: 'mysql2',
         connection: {
             host: credentials.host,
             database: credentials.database,

@@ -43,10 +43,9 @@ router.post('/signup', async (req, res) => {
         } else {
 
             try {
-                
-                const userFound = await User.query().select().where({ 'username': username }).limit(1);
+                const userFound = await User.query().select().where({ 'name': username }).limit(1);
                 const emailFound = await User.query().select().where({ 'email': email }).limit(1);
-
+         
                 if (userFound.length > 0 || emailFound.length > 0) {
 
                     return res.redirect('/signup?error');
@@ -55,7 +54,7 @@ router.post('/signup', async (req, res) => {
 
                     const hashedPassword = await bcrypt.hash(password, saltRounds);
                     const createdUser = await User.query().insert({
-                        username,
+                        name: username,
                         email,
                         password: hashedPassword
                     });
@@ -65,7 +64,7 @@ router.post('/signup', async (req, res) => {
                 }
 
             } catch (error) {
-                return res.status(500).send({ response: "Something went wrong with the database." });
+                return res.status(500).send({ response: "Something went wrong with the database.", error });
             }
         }
     } else if (password && passwordRepeat && !isPasswordTheSame) {
@@ -82,11 +81,11 @@ router.post("/login", async (req, res) => {
 
     if (username && password) {
         try {
-            User.query().select('username').where({ 'username': username }).then( async userFound => {
+            User.query().select('name').where({ 'name': username }).then( async userFound => {
                 if (userFound.length == 0) {
                     return res.redirect("/login?error");
                 } else {
-                    const matchingPassword = await User.query().select('password').where({ 'username': username }).limit(1);
+                    const matchingPassword = await User.query().select('password').where({ 'name': username }).limit(1);
                     const passwordToValidate = matchingPassword[0].password;
 
                     bcrypt.compare(password, passwordToValidate).then((result) => {

@@ -1,26 +1,35 @@
 const { Model } = require('objection');
 
 const Category = require('./Category.js');
-const Rating = require('./Rating.js');
+const Review = require('./Review.js');
+const Stock = require('./Stock.js');
 
 class Beer extends Model {
-    static tableName = 'beers';
+    static tableName = 'beer';
 
     static relationMappings = {
         category: {
             relation: Model.BelongsToOneRelation,
             modelClass: Category,
             join: {
-                from: 'beers.categoryId',
-                to: 'categories.id'
+                from: 'beer.category',
+                to: 'category.id'
             }
         },
-        rating: {
+        review: {
             relation: Model.HasManyRelation,
-            modelClass: Rating,
+            modelClass: Review,
             join: {
-                from: 'beers.id',
-                to: 'ratings.beerId'
+                from: 'beer.id',
+                to: 'review.beer'
+            }
+        },
+        stock: {
+            relation: Model.HasManyRelation,
+            modelClass: Stock,
+            join: {
+                from: 'beer.id',
+                to: 'stock.beer'
             }
         }
 
