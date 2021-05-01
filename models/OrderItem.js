@@ -7,22 +7,6 @@ class OrderItem extends Model {
     static tableName = 'order_item';
 
     static relationMappings = {
-        price_history: {
-            relation: Model.BelongsToOneRelation,
-            ModelClass: PriceHistory,
-            join: {
-                from: 'order_item.price_history',
-                to: 'price_history.id'
-            }
-        },
-        order: {
-            relation: Model.BelongsToOneRelation,
-            ModelClass: Order,
-            join: {
-                from: 'order_item.order',
-                to: 'order.id'
-            }
-        }
     }
 }
 
