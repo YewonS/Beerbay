@@ -43,13 +43,13 @@ class PrintableError extends Error{
 router.post('/api/cart/create-order', async (req, res) => {
     Stock.transaction(async trx => {
         try {
+            let user = await User.query(trx).select('id').where({name:req.session.user}).first()
+            let order = await Order.query(trx).insert({
+                user:user.id,
+                status:1
+            })
             for(i in req.session.cart) {
                 let amount =  req.session.cart[i];
-                let user = await User.query(trx).select('id').where({name:req.session.user}).first()
-                let order = await Order.query(trx).insert({
-                    user:user.id,
-                    status:1
-                })
                 let [shopID, beerID] = i.split(':');
                 let stock = await Stock.query(trx).select('stock.amount','price_history.id')
                     .where('stock.beer', '=', beerID).andWhere({ 'stock.shop': shopID })
@@ -64,6 +64,8 @@ router.post('/api/cart/create-order', async (req, res) => {
                     amount
                 })
             }
+            req.session.cart = {};
+            res.send({"responce":"ok"})
         } catch (error) {
             console.log(error)
             trx.rollback();
@@ -75,7 +77,5 @@ router.post('/api/cart/create-order', async (req, res) => {
         }
 
     });
-    delete req.session.cart[`${req.params.shopID}:${req.params.beerID}`];
-    return res.send({ response: "ok" });
 })
 module.exports = router;
