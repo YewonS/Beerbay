@@ -1,5 +1,5 @@
 const { Model } = require('objection');
-
+const path = require("path");
 const Review = require('./Review.js');
 const Order = require('./Order.js');
 
@@ -15,14 +15,6 @@ class User extends Model {
                 to: 'review.user'
             }
 
-        },
-        order: {
-            relation: Model.HasManyRelation,
-            modelClass: Order,
-            join: {
-                from: 'user.id',
-                to: 'order.user'
-            }
         }
     }
 
