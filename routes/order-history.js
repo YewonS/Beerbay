@@ -2,13 +2,16 @@ const router = require('express').Router();
 
 const OrderItem = require('../models/OrderItem.js');
 
-router.get('/api/order-item', async (req, res) => {
-    const orders = await OrderItem.query();
-    return res.send({ Response: orders});
-});
+const goToLoginPage = (req, res, next) => {
+    if (!req.session.user) {
+        res.redirect('/login');
+    } else {
+        next();
+    }
+}
 
-router.get('/api/order-item/:user', async (req, res) => {
-    const username = req.params.user;
+router.get('/api/order-item', goToLoginPage,  async (req, res) => {
+    const username = req.session.user;
     const orders = await OrderItem.query()
         .join('order', 'order_item.order', '=', 'order.id')
         .join('user', 'order.user', '=', 'user.id')
