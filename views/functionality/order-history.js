@@ -16,13 +16,10 @@ $(document).ready(function () {
     }
 
     $.ajax({
-        url: `/api/order-item/` + user,
+        url: `/api/order-item`,
         type: 'GET'
     }).done(data => {
-        console.log(data);
         const orders = data.response;
-        console.log(orders);
-        console.log('aaaaaaaaaaaaaaaaaaaaaa');
         for (let i in orders){
             displayOrders(i, orders);
         }
