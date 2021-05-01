@@ -40,14 +40,17 @@ router.get('/rating', goToLoginPage, (req, res) => {
 
 router.post('/add-rating', goToLoginPage, async (req, res) => {
 
-    const { userID, beerID, rating } = req.body;
+    console.log('req.body', req.body)
 
-    if (userID && beerID && rating) {
+    const { user, beer, rating } = req.body;
 
+    if (user && beer && rating) {
+
+        console.log('before insert================')
         const createReview = await Review.query().insert({
-            rating,
-            beer: beerID,
-            user: userID
+            beer: beer,
+            rating: rating,
+            user: user
         });
 
         return res.send(createReview);

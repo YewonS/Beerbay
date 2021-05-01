@@ -21,8 +21,8 @@ router.get('/api/username/:username', goToLoginPage, async (req, res) => {
 
 });
 
-router.get('/api/reviews/user/username/:username', goToLoginPage, async (req, res) => {
-    const username = req.params.username;
+router.get('/api/reviews/user/username/', goToLoginPage, async (req, res) => {
+    const username = req.session.user;
     const userFound = await User.query().select('user.name', 'review.*', 'beer.*', 'category.name')
         .where({ 'user.name': username })
         .join('review', 'user.id', '=', 'review.user')

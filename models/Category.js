@@ -11,10 +11,11 @@ class Category extends Model {
             modelClass: Beer,
             join: {
                 from: 'category.id',
-                to: 'beers.categoryId'
+                to: 'beer.category'
             }
 
         }
+        
     }
 
 }

@@ -13,7 +13,7 @@ router.get('/api/reviews', async (req, res) => {
 
 router.get('/api/reviews/beerid/:id', async (req, res) => {
     const id = req.params.id;
-    const ratingFound = await Review.query().select('review.*', 'beer.beername', 'user.name')
+    const ratingFound = await Review.query().select('review.*', 'beer.*', 'user.name')
         .where({ 'beer': id })
         .join('beer', 'review.beer', '=', 'beer.id')
         .join('user', 'review.user', '=', 'user.id');
