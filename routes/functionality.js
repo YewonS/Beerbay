@@ -21,6 +21,10 @@ router.get('/search-bars', goToLoginPage, (req, res) => {
     return res.render('./functionality/search-bars.ejs', { gMapsApiKey: gmapsApiKey, sessionUser: req.session.user });
 });
 
+router.get('/show-collections:id', goToLoginPage, (req, res) => {
+    return res.render('./functionality/show-collections.ejs', { sessionUser: req.session.user });
+});
+
 router.get('/cart', goToLoginPage, (req, res) => {
     return res.render('./functionality/cart.ejs', {sessionUser: req.session.user});
 });
@@ -37,7 +41,6 @@ router.get('/rating', goToLoginPage, (req, res) => {
 router.post('/add-rating', goToLoginPage, async (req, res) => {
 
     const { userID, beerID, rating } = req.body;
-    console.log(userID, beerID, rating);
 
     if (userID && beerID && rating) {
 

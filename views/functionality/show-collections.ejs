@@ -1,0 +1,44 @@
+<%- include('../global/header.ejs') %>
+<%- include('../global/navbarHome.ejs') %>
+
+<script src="./functionality/show-collections.js"></script>
+<script>
+  const user = "<%= sessionUser %>";
+</script>
+
+<!-- css -->
+<link rel="stylesheet" type="text/css" href="./functionality/show-collections.css">
+
+<h3>Collections</h3>
+<br>
+<br>
+
+<div class="show-collections">
+   
+    <h5>Result </h5>
+    <table class="table table-dark beer-table">
+        <thead>
+          <tr>
+            <th scope="col">Beer name</th>
+            <th scope="col">Shop name</th>
+            <th scope="col">Shop address</th>
+            <th scope="col">Price</th>
+            <th scope="col">Amount</th>
+            <th scope="col">Add to Cart</th>
+          </tr>
+        </thead>
+        <tbody class="show-collections-result">
+        
+        </tbody>
+    </table>
+    
+
+
+</div>
+
+
+
+
+
+<%- include('../global/chat.ejs') %>
+<%- include('../global/footer.ejs') %>

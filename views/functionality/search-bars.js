@@ -1,3 +1,5 @@
+const Shop = require("../../models/Shop");
+
 let url = window.location.href;
 url = url.substr(url.lastIndexOf("/") + 1);
 let beerID;
@@ -92,14 +94,15 @@ function getCollections(barName) {
 
     // get the bar id
     $.ajax({
-        url: `/api/bars/name/` + barName,
+        url: `/api/shops/name/` + barName,
         type: 'GET'
     }).done(data => {
+        console.log('bar id', barID)
         let barID = data.response[0].id;
     
         // get the collections and display them on the table
         $.ajax({
-            url: `/api/collections/bar/` + barID,
+            url: `/api/stocks/bar/` + barID,
             type: 'GET'
         }).done(data => {
             let collection = data.response;
@@ -110,10 +113,7 @@ function getCollections(barName) {
                 <tr class="result-row">
                     <th scope="row">${i + 1}</th>
                     <td>${beer.beername}</td>
-                    <td>${beer.brewery}</td>
-                    <td>${beer.country}</td>
                     <td>${beer.abv}</td>
-                    <td>${beer.category}</td>
                 </tr>
                 `);
             }
@@ -131,7 +131,7 @@ function getCollections(barName) {
 $(document).ready(function() {
 
     $.ajax({
-        url: `/api/bars`,
+        url: `/api/shops`,
         type: 'GET',
         dataType: 'json'
     }).done(data => {
@@ -147,7 +147,7 @@ $(document).ready(function() {
 
     if(beerId)
         $.ajax({
-            url: `/api/collections/beer/${beerId}`,
+            url: `/api/stocks/beer/${beerId}`,
             type: 'GET',
             dataType: 'json'
         }).done(data => {
@@ -157,6 +157,7 @@ $(document).ready(function() {
     
 
     $(".btn-dark").on("click", function(){
+        console.log('search-button clicked')
         const inputString = $('.search-input').val().toLowerCase();
 
 

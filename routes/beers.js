@@ -4,7 +4,6 @@ const Beer = require('../models/Beer.js');
 
 router.get('/api/beers', async (req, res) => {
     const beers = await Beer.query().select('beer.*', 'category.name').join('category', 'beer.category', '=', 'category.id');
-    console.log(beers)
     return res.send({ response: beers });
 });
 
@@ -36,7 +35,7 @@ router.get('/api/beername/:beername/category/:category', async (req, res) => {
     const category = req.params.category;
 
     const beersFound = await Beer.query().select('beer.*', 'category.name').where({ 'beername': beername, 'category': category })
-        .join('category', 'beer.category', '=', 'category.id').limit(1);
+        .join('category', 'beer.category', '=', 'category.id');
 
     if (beersFound.length > 0) {
         return res.send({ response: beersFound });
