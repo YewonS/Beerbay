@@ -69,6 +69,7 @@ const shopRoute = require('./routes/shops.js');
 const stockRoute = require('./routes/stocks.js');
 const functionRoute = require('./routes/functionality.js');
 const authRoute = require('./routes/auth.js');
+const orderHistoryRoute = require('./routes/order-history.js');
 app.use(beerRoute);
 app.use(userRoute);
 app.use(categoryRoute);
@@ -77,6 +78,7 @@ app.use(shopRoute);
 app.use(stockRoute);
 app.use(functionRoute);
 app.use(authRoute);
+app.use(orderHistoryRoute);
 
 
 const goToLoginPage = (req, res, next) => {
