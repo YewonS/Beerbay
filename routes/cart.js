@@ -24,6 +24,7 @@ router.get('/api/cart', async (req, res) => {
     }
     return res.send({ response: items });
 })
+
 router.post('/api/cart', async (req, res) => {
     req.session.cart = req.session.cart ? req.session.cart : {};
     let shopID = req.body.shopID;
@@ -33,6 +34,7 @@ router.post('/api/cart', async (req, res) => {
     console.log(req.session.cart)
     return res.send({ response: "ok" });
 })
+
 router.delete('/api/cart/:beerID/:shopID', async (req, res) => {
     delete req.session.cart[`${req.params.shopID}:${req.params.beerID}`];
     return res.send({ response: "ok" });
@@ -77,5 +79,7 @@ router.post('/api/cart/create-order', async (req, res) => {
         }
 
     });
-})
+});
+
+
 module.exports = router;

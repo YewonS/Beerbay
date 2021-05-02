@@ -46,7 +46,6 @@ router.post('/add-rating', goToLoginPage, async (req, res) => {
 
     if (user && beer && rating) {
 
-        console.log('before insert================')
         const createReview = await Review.query().insert({
             beer: beer,
             rating: rating,

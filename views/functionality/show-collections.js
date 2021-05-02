@@ -7,7 +7,7 @@ if (url.includes(":")) {
     beerID = null;
 }
 
-function populateCollection(collection) {
+function populateCollection(collection, beerID) {
     console.log(collection)
     $('.show-collections-result').append(`
         <tr class="result-row">
@@ -15,8 +15,8 @@ function populateCollection(collection) {
             <td>${collection.name}</td>
             <td>${collection.address}</td>
             <td>${collection.price}</td>
-            <td><input type="text" class="amount-input" id="amount-input-${collection.name}" value="1"></td>
-            <td class="add-to-cart-btn"><a class="btn btn-dark" href="" val="${collection}"><i class="fas fa-shopping-cart"></i></a></td>
+            <td><input type="text" class="amount-input" id="amount-input-${collection.id}" value="1"></td>
+            <td><a class="btn btn-dark" id="add-to-cart-btn" data-beer="${beerID}" data-shop="${collection.id}"><i class="fas fa-shopping-cart"></i></a></td>
         </tr>
     `);
 }
@@ -35,7 +35,7 @@ $(document).ready(function() {
             let firstCollection = collections[0];
             let firstShop = firstCollection.name;
 
-            populateCollection(firstCollection);
+            populateCollection(firstCollection, beerID);
 
             for (let i = 1; i < collections.length - 1; i++) {
                 let collectionToCompare = collections[i];
@@ -44,7 +44,7 @@ $(document).ready(function() {
                 let shop2 = nextCollection.name;
 
                 if (firstShop === shop1 && shop1 !== shop2) {
-                    populateCollection(nextCollection);
+                    populateCollection(nextCollection, beerID);
                 } 
             }
 
@@ -56,12 +56,44 @@ $(document).ready(function() {
                 let shop2 = nextCollection.name;
 
                 if (shop1 !== shop2) {
-                    populateCollection(collectionToCompare);
-                    populateCollection(nextCollection);
+                    populateCollection(collectionToCompare, beerID);
+                    populateCollection(nextCollection, beerID);
                 } 
             }
         }
         
     });
+
+    $('.show-collections-result').on('click', '#add-to-cart-btn', function(e) {
+        let shopID = $(this).attr('data-shop');
+        let beerID = $(this).attr('data-beer');
+        
+        let amountID = "#amount-input-" + shopID;
+        let amountSelected = $(amountID).val();
+
+        let cartItem = {
+            shopID,
+            beerID,
+            amount: amountSelected
+        }
+
+        $.ajax({
+            url: `/api/cart`,
+            type: "POST",
+            dataType: "json",
+            data: JSON.stringify(cartItem),
+            contentType: "application/json; charset=utf-8"
+        }).done((data) => {
+
+            console.log("New item added to cart", data);
+            alert("Item added to cart.");
+        
+        }).fail(() => {
+            alert("Error happened while adding item into the cart. Please try again.");
+        });
+
+        
+    })
+
 
 })

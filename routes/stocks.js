@@ -6,8 +6,7 @@ const Stock = require('../models/Stock.js');
 // find all shops that has specific beer - with the shop name and address
 router.get('/api/stocks/beer/:id', async (req, res) => {
     const beerID = parseInt(req.params.id);
-    console.log('beerID', beerID)
-    const collections = await Stock.query().select('stock.amount', 'shop.name', 'shop.address', 'beer.beername', 'price_history.price', 'price_history.start_date')
+    const collections = await Stock.query().select('stock.amount', 'shop.id', 'shop.name', 'shop.address', 'beer.beername', 'price_history.price', 'price_history.start_date')
         .where({ 'price_history.beer': beerID})
         .where({ 'stock.beer': beerID})
         .where({ 'beer.id': beerID})
