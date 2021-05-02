@@ -17,7 +17,7 @@ function update(){
             let row = $(`<tr class="result-row">
                     <td>${item.beerBar.name}</td>
                     <td>${item.beerBar.beername}</td>
-                    <td>${item.beerBar.amount}</td>
+                    <td>${item.amount}</td>
             </tr>`)
             row.append($("<td></td>").append($(`<button class="btn btn-warning">Delete</button>`).click(deleteAction(item.beerBar.beer,item.beerBar.shop))))
             $('.cart-tbody').append(row);

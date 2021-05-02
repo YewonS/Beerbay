@@ -24,15 +24,16 @@ router.get('/api/cart', async (req, res) => {
     }
     return res.send({ response: items });
 })
+
 router.post('/api/cart', async (req, res) => {
     req.session.cart = req.session.cart ? req.session.cart : {};
     let shopID = req.body.shopID;
     let beerID = req.body.beerID;
     let amount = req.body.amount;
     req.session.cart[`${shopID}:${beerID}`] = amount;
-    console.log(req.session.cart)
     return res.send({ response: "ok" });
 })
+
 router.delete('/api/cart/:beerID/:shopID', async (req, res) => {
     delete req.session.cart[`${req.params.shopID}:${req.params.beerID}`];
     return res.send({ response: "ok" });
@@ -54,7 +55,6 @@ router.post('/api/cart/create-order', async (req, res) => {
                 let stock = await Stock.query(trx).select('stock.amount','price_history.id')
                     .where('stock.beer', '=', beerID).andWhere({ 'stock.shop': shopID })
                     .join('price_history', {'price_history.beer': 'stock.beer','price_history.shop': 'stock.shop'}).orderBy('price_history.start_date', 'desc')
-                console.log(stock)
                 if(stock[0].amount < amount){
                     throw new PrintableError("not in stock")
                 }
@@ -77,5 +77,7 @@ router.post('/api/cart/create-order', async (req, res) => {
         }
 
     });
-})
+});
+
+
 module.exports = router;

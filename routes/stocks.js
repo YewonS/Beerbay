@@ -5,10 +5,16 @@ const Stock = require('../models/Stock.js');
 
 // find all shops that has specific beer - with the shop name and address
 router.get('/api/stocks/beer/:id', async (req, res) => {
-    const beerID = req.params.id;
-    const collections = await Stock.query().select('stock.*', 'shop.name', 'shop.address', 'beer.beername', 'beer.abv', 'beer.picture', 'beer.category')
-        .where('beer.id', '=', beerID)
-        .join('shop', 'stock.shop', '=', 'shop.id').join('beer', 'stock.beer', '=', 'beer.id');
+    const beerID = parseInt(req.params.id);
+    const collections = await Stock.query().select('stock.amount', 'shop.id', 'shop.name', 'shop.address', 'beer.beername', 'price_history.price', 'price_history.start_date')
+        .where({ 'price_history.beer': beerID})
+        .where({ 'stock.beer': beerID})
+        .where({ 'beer.id': beerID})
+        .join('shop', 'stock.shop', '=', 'shop.id')
+        .join('beer', 'stock.beer', '=', 'beer.id')
+        .join('price_history', 'stock.shop', '=', 'price_history.shop')
+        .orderBy('shop.name', 'asc')
+        .orderBy('price_history.start_date', 'desc');
     if (collections.length > 0) {
         return res.send({ response: collections });
     } else {

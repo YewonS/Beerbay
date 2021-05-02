@@ -3,7 +3,7 @@ $(document).ready(function () {
     // get ratings of the user
 
     $.ajax({
-        url: `/api/ratings/user/username/` + user,
+        url: `/api/reviews/user/username/`,
         type: 'GET'
     
     }).done(data => {
@@ -12,14 +12,12 @@ $(document).ready(function () {
         for (let i = 0; i < ratings.length; i++) {
             let rating = ratings[i];
 
+
             $('.ratings-tbody').append(`<tr class="result-row">
                                                 <th scope="row">${i + 1}</th>
                                                 <td>${rating.beername}</td>
-                                                <td>${rating.brewery}</td>
-                                                <td>${rating.country}</td>
                                                 <td>${rating.abv}</td>
-                                                <td>${rating.category}</td>
-                                                <td>${rating.ratings}</td>
+                                                <td>${rating.rating}</td>
                                             </tr>
             `);
         }
@@ -101,8 +99,8 @@ $(document).ready(function () {
             if (userID && beerID && rating) {
         
                 const ratingData = {
-                    userID: userID,
-                    beerID: beerID,
+                    user: userID,
+                    beer: beerID,
                     rating: rating
                 }
         

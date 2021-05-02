@@ -5,11 +5,9 @@ $(document).ready(function () {
         $('.search-beer-result').append(`<tr class="result-row">
                                                         <th scope="row">1</th>
                                                         <td>${beer[i].beername}</td>
-                                                        <td>${beer[i].brewery}</td>
-                                                        <td>${beer[i].country}</td>
                                                         <td>${beer[i].abv}</td>
                                                         <td>${beer[i].category}</td>
-                                                        <td class="find-bars"><a class="btn btn-dark" href="/search-bars:${beer[i].id}" val="${beer[i].id}"><i class="fa fa-search"></i></a></td>
+                                                        <td class="find-bars"><a class="btn btn-dark" href="/show-collections:${beer[i].id}" val="${beer[i].id}"><i class="fa fa-search"></i></a></td>
                                                     </tr>`);
 
     }
@@ -21,7 +19,7 @@ $(document).ready(function () {
         const categories = data.response;
         
         for (let x in categories) {
-            $('#category').append(`<option value=${categories[x].id}>${categories[x].category}</option>`);
+            $('#category').append(`<option value=${categories[x].id}>${categories[x].name}</option>`);
         }
     
     });
