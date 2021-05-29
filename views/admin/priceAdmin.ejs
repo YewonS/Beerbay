@@ -1,0 +1,24 @@
+<%- include('./headerAdmin.ejs') %>
+<%- include('./navbarAdmin.ejs') %>
+
+<!-- <script src="js file"></script> -->
+<script>
+  const user = "<%= sessionUser %>";
+  const admin = "<%= sessionAdmin %>";
+</script>
+
+<h5>Price List</h5>
+<table class="table table-dark beer-collection">
+    <thead>
+      <tr>
+        <th scope="col">Beer</th>
+        <th scope="col">StartDate</th>
+        <th scope="col">Price</th>
+      </tr>
+    </thead>
+    <tbody class="beer-collection-body">
+    
+    </tbody>
+</table>
+
+<%- include('../global/footer.ejs') %>

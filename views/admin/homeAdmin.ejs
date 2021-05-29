@@ -1,0 +1,26 @@
+<%- include('./headerAdmin.ejs') %>
+<%- include('./navbarAdmin.ejs') %>
+
+<script>
+  const user = "<%= sessionUser %>";
+</script>
+
+<h1>Welcome to Beerbay Administration Page!</h1>
+<span class="row">
+
+  <div class="card block">
+    <img class="card-img-top" src="../pic/beer7.jpg" alt="Card image cap">
+    <div class="card-body">
+      <p class="card-text">You can manage your beer stocks.</p>
+    </div>
+  </div>
+  <div class="card block">
+    <img class="card-img-top" src="../pic/beer5.jpg" alt="Card image cap">
+    <div class="card-body">
+      <p class="card-text">You can also manage the prices of beers.</p>
+    </div>
+  </div>
+
+</span>
+
+<%- include('../global/footer.ejs') %>

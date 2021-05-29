@@ -2,6 +2,7 @@ const router = require('express').Router();
 const emailValidator = require('email-validator');
 
 const User = require('../models/User.js');
+const ShopOwner = require('../models/ShopOwner.js');
 
 /* Bcrypt */
 const bcrypt = require('bcrypt');
@@ -88,14 +89,31 @@ router.post("/login", async (req, res) => {
                     const matchingPassword = await User.query().select('password').where({ 'name': username }).limit(1);
                     const passwordToValidate = matchingPassword[0].password;
 
-                    bcrypt.compare(password, passwordToValidate).then((result) => {
-                        if (result) {
-                            req.session.user = username;
-                            return res.redirect("/home");
-                        } else {
-                            return res.redirect("login?error");
-                        }
-                    });
+                    try{
+                        const getID = await User.query().select('id').where({ 'name': username }).limit(1);
+                        const userID = getID[0].id;
+                        const shopOwner = await ShopOwner.query().select().where({ 'user': userID});
+
+                        bcrypt.compare(password, passwordToValidate).then((result) => {
+                            if (result) {
+                                req.session.user = username;
+
+                                if (shopOwner.length > 0) {
+                                    req.session.admin = userID;
+                                    console.log('===== shop owner =====');
+                                    return res.redirect("/admin/home");
+                                } else {
+                                    return res.redirect("/home");
+                                }
+
+                            } else {
+                                return res.redirect("login?error");
+                            }
+                        });
+                        
+                    } catch (error) {
+                        return res.redirect("login?error");
+                    }
                 }
 
             });

@@ -21,7 +21,8 @@ router.get('/api/order-item', goToLoginPage,  async (req, res) => {
         .join('beer', 'price_history.beer', '=', 'beer.id')
         .join('category', 'beer.category', '=', 'category.id')
         .select('shop.name ', 'beer.beername', 'category.name as BeerType', 'price_history.price', 'order_item.amount', 'order_status.name as status', 'order.id as OrderID')
-        .where('user.name', '=', username);
+        .where('user.name', '=', username)
+        .orderBy('order.id', 'desc');
         
     if (orders.length > 0) {
         return res.send({ response: orders });
