@@ -1,6 +1,9 @@
 const express = require('express');
 const app = express();
-
+const fileUpload = require("express-fileupload")
+app.use(fileUpload({
+    limits: { fileSize: 50 * 1024 * 1024 },
+}));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
@@ -22,7 +25,6 @@ io.on('connection', socket => {
         // emits to all clients
         io.emit("A client said", { message: escape(data.message) , username: data.username});
     });
-
 
 });
 
@@ -61,6 +63,7 @@ Model.knex(knex);
 
 
 /* Add routes */
+const imageRoute = require('./routes/images.js');
 const beerRoute = require('./routes/beers.js');
 const userRoute = require('./routes/users.js');
 const categoryRoute = require('./routes/categories.js');
@@ -71,6 +74,7 @@ const functionRoute = require('./routes/functionality.js');
 const authRoute = require('./routes/auth.js');
 const orderHistoryRoute = require('./routes/order-history.js');
 const cartRoute = require('./routes/cart.js');
+app.use("/api/image",imageRoute);
 app.use(beerRoute);
 app.use(userRoute);
 app.use(categoryRoute);
