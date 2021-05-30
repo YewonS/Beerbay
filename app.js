@@ -119,8 +119,9 @@ app.get('/admin/home', goToLoginPage, (req, res) => {
     console.log("session: ", req.sessionID);
     console.log("user: ", req.session.user);
     console.log("admin: ", req.session.admin);
+    console.log("shop: ", req.session.shop);
 
-    return res.render('./admin/homeAdmin.ejs', { sessionUser: req.session.user });
+    return res.render('./admin/homeAdmin.ejs', { sessionUser: req.session.user, sessionAdmin: req.session.admin, sessionShop: req.session.shop });
 })
 
 

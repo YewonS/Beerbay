@@ -100,6 +100,7 @@ router.post("/login", async (req, res) => {
 
                                 if (shopOwner.length > 0) {
                                     req.session.admin = userID;
+                                    req.session.shop = shopOwner[0].shop;
                                     console.log('===== shop owner =====');
                                     return res.redirect("/admin/home");
                                 } else {

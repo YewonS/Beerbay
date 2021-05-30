@@ -1,10 +1,13 @@
 <%- include('./headerAdmin.ejs') %>
 <%- include('./navbarAdmin.ejs') %>
 
-<!-- <script src="js file"></script> -->
+<!-- javascript -->
+<script src="./beerAdmin.js"></script>
+
 <script>
   const user = "<%= sessionUser %>";
   const admin = "<%= sessionAdmin %>";
+  const shop = "<%= sessionShop %>";
 </script>
 
 <h5>Beer Collection</h5>
@@ -13,7 +16,6 @@
       <tr>
         <th scope="col">Beer</th>
         <th scope="col">ABV</th>
-        <th scope="col">Category</th>
         <th scope="col">Amount</th>
         <th scope="col">Edit Amount</th>
       </tr>

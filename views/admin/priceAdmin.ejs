@@ -1,14 +1,17 @@
 <%- include('./headerAdmin.ejs') %>
 <%- include('./navbarAdmin.ejs') %>
 
-<!-- <script src="js file"></script> -->
+<!-- javascript -->
+<script src="./priceAdmin.js"></script>
+
 <script>
   const user = "<%= sessionUser %>";
   const admin = "<%= sessionAdmin %>";
+  const shop = "<%= sessionShop %>";
 </script>
 
 <h5>Price List</h5>
-<table class="table table-dark beer-collection">
+<table class="table table-dark price-list">
     <thead>
       <tr>
         <th scope="col">Beer</th>
@@ -16,7 +19,7 @@
         <th scope="col">Price</th>
       </tr>
     </thead>
-    <tbody class="beer-collection-body">
+    <tbody class="price-list-body">
     
     </tbody>
 </table>
