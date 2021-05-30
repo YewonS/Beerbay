@@ -1,5 +1,3 @@
-const Shop = require("../../models/Shop");
-
 let url = window.location.href;
 url = url.substr(url.lastIndexOf("/") + 1);
 let beerID;
@@ -97,12 +95,12 @@ function getCollections(barName) {
         url: `/api/shops/name/` + barName,
         type: 'GET'
     }).done(data => {
-        console.log('bar id', barID)
         let barID = data.response[0].id;
+        console.log('bar id', barID)
     
         // get the collections and display them on the table
         $.ajax({
-            url: `/api/stocks/bar/` + barID,
+            url: `/api/stocks/shop/` + barID,
             type: 'GET'
         }).done(data => {
             let collection = data.response;
