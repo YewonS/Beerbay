@@ -7,6 +7,8 @@ router.get('/api/shops', async (req, res) => {
     return res.send({ response: shop });
 });
 
+
+
 router.get('/api/shops/name/:name', async (req, res) => {
     const name = req.params.name;
     const shopsFound = await Shop.query().select().where({ 'name': name }).limit(1);
