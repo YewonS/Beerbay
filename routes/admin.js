@@ -16,6 +16,10 @@ router.get('/admin/beer', authorised, async (req, res) => {
     return res.render('./admin/beerAdmin.ejs', { sessionAdmin: req.session.admin, sessionUser: req.session.user, sessionShop: req.session.shop });
 });
 
+router.get('/admin/picture', authorised, async (req, res) => {
+    return res.render('./admin/pictureAdmin.ejs', { sessionAdmin: req.session.admin, sessionUser: req.session.user, sessionShop: req.session.shop });
+});
+
 router.get('/admin/price', authorised, async (req, res) => {
     return res.render('./admin/priceAdmin.ejs', { sessionAdmin: req.session.admin, sessionUser: req.session.user, sessionShop: req.session.shop });
 });
@@ -66,6 +70,11 @@ router.get('/api/admin/orders', authorised, async (req, res) => {
         return res.status(400).send({ response: "No price history of the shop found." });
     }
 });
+
+router.get('/api/admin/images', authorised, async (req, res) => {
+    const shopID = req.session.shop;
+    //TODO : get all the images of all beers that are owned by this shop
+})
 
 
 module.exports = router;
