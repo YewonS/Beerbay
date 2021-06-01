@@ -43,7 +43,10 @@ router.get('/api/admin/beers', authorised, async (req, res) => {
 
 router.get('/api/admin/prices', authorised, async (req, res) => {
     const shopID = req.session.shop;
-    const priceList = await PriceHistory.query().select('beer.beername', 'price_history.*').where({ 'price_history.shop': shopID }).join('beer', 'price_history.beer', '=', 'beer.id');
+    const priceList = await PriceHistory.query().select('beer.beername', 'price_history.*')
+        .where({ 'price_history.shop': shopID })
+        .join('beer', 'price_history.beer', '=', 'beer.id')
+        .orderBy('price_history.start_date', 'desc');
     if (priceList.length > 0) {
         return res.send({ response: priceList });
     } else {
@@ -70,11 +73,6 @@ router.get('/api/admin/orders', authorised, async (req, res) => {
         return res.status(400).send({ response: "No price history of the shop found." });
     }
 });
-
-router.get('/api/admin/images', authorised, async (req, res) => {
-    const shopID = req.session.shop;
-    //TODO : get all the images of all beers that are owned by this shop
-})
 
 
 module.exports = router;
