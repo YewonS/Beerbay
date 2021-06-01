@@ -1,11 +1,22 @@
 const router = require('express').Router();
 
 const Beer = require('../models/Beer.js');
+const { route } = require('./images.js');
 
 router.get('/api/beers', async (req, res) => {
     const beers = await Beer.query().select('beer.*', 'category.name').join('category', 'beer.category', '=', 'category.id');
     return res.send({ response: beers });
 });
+
+router.get('/api/beers/:id', async (req, res) => {
+    const beerID = req.params.id;
+    const beerName = await Beer.query().select('beername').where({ 'id': beerID });
+    if (beerName.length > 0) {
+        return res.send({ response: beerName});
+    } else {
+        return res.status(400).send({ response: "No beername of the id found. " });
+    }
+})
 
 router.get('/api/beers/category/:categoryId', async (req, res) => {
     const categoryId = req.params.categoryId;

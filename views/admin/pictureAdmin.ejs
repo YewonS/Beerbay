@@ -1,0 +1,31 @@
+<%- include('./headerAdmin.ejs') %>
+<%- include('./navbarAdmin.ejs') %>
+
+<!-- javascript -->
+<script src="./pictureAdmin.js"></script>
+
+<script>
+  const user = "<%= sessionUser %>";
+  const admin = "<%= sessionAdmin %>";
+  const shop = "<%= sessionShop %>";
+</script>
+
+<div style="display: flex; justify-content: flex-end;">
+    <a class="btn btn-warning" style="width: 150px;">Add Picture</a>
+</div>
+
+<h5>Images and Pictures</h5>
+<table class="table table-dark image-table">
+    <thead>
+      <tr>
+        <th scope="col">Beer</th>
+        <th scope="col">Picture</th>
+        <th scope="col">Edit Picture</th>
+      </tr>
+    </thead>
+    <tbody class="image-table-body">
+    
+    </tbody>
+</table>
+
+<%- include('../global/footer.ejs') %>

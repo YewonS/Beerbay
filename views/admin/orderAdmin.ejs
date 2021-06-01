@@ -1,0 +1,30 @@
+<%- include('./headerAdmin.ejs') %>
+<%- include('./navbarAdmin.ejs') %>
+
+<!-- javascript -->
+<script src="./orderAdmin.js"></script>
+
+<script>
+  const user = "<%= sessionUser %>";
+  const admin = "<%= sessionAdmin %>";
+  const shop = "<%= sessionShop %>";
+</script>
+
+<h5>List of Orders</h5>
+<table class="table table-dark order-list">
+    <thead>
+      <tr>
+        <th scope="col">Order ID</th>
+        <th scope="col">Customer</th>
+        <th scope="col">Beer</th>
+        <th scope="col">Amount</th>
+        <th scope="col">Status</th>
+        <th scope="col">Edit Status</th>
+      </tr>
+    </thead>
+    <tbody class="order-list-body">
+    
+    </tbody>
+</table>
+
+<%- include('../global/footer.ejs') %>

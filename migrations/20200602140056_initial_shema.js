@@ -80,6 +80,15 @@ exports.up = function(knex) {
 
             table.integer('user');
             table.foreign('user').references('user.id');
+        })
+        .createTable('shop_owner', (table) => {
+            table.increments('id').unique.primary();
+
+            table.integer('user');
+            table.foreign('user').references('user.id');
+
+            table.integer('shop');
+            table.foreign('shop').references('shop.id');
         });
         
 
@@ -90,6 +99,7 @@ exports.down = function(knex) {
         .dropTableIfExists('review')
         .dropTableIfExists('order_item')
         .dropTableIfExists('order')
+        .dropTableIfExists('shop_owner')
         .dropTableIfExists('user')
         .dropTableIfExists('price_history')
         .dropTableIfExists('stock')

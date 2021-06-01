@@ -74,6 +74,7 @@ const functionRoute = require('./routes/functionality.js');
 const authRoute = require('./routes/auth.js');
 const orderHistoryRoute = require('./routes/order-history.js');
 const cartRoute = require('./routes/cart.js');
+const adminRoute = require('./routes/admin.js');
 app.use("/api/image",imageRoute);
 app.use(beerRoute);
 app.use(userRoute);
@@ -85,7 +86,7 @@ app.use(functionRoute);
 app.use(authRoute);
 app.use(orderHistoryRoute);
 app.use(cartRoute);
-
+app.use(adminRoute);
 
 
 const goToLoginPage = (req, res, next) => {
@@ -116,6 +117,15 @@ app.get('/home', goToLoginPage, (req, res) => {
     console.log("user: ", req.session.user);
 
     return res.render('./global/home.ejs', { sessionUser: req.session.user });
+})
+
+app.get('/admin/home', goToLoginPage, (req, res) => {
+    console.log("session: ", req.sessionID);
+    console.log("user: ", req.session.user);
+    console.log("admin: ", req.session.admin);
+    console.log("shop: ", req.session.shop);
+
+    return res.render('./admin/homeAdmin.ejs', { sessionUser: req.session.user, sessionAdmin: req.session.admin, sessionShop: req.session.shop });
 })
 
 

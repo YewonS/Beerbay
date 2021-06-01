@@ -1,0 +1,32 @@
+<%- include('./headerAdmin.ejs') %>
+<%- include('./navbarAdmin.ejs') %>
+
+<!-- javascript -->
+<script src="./beerAdmin.js"></script>
+
+<script>
+  const user = "<%= sessionUser %>";
+  const admin = "<%= sessionAdmin %>";
+  const shop = "<%= sessionShop %>";
+</script>
+
+<div style="display: flex; justify-content: flex-end;">
+  <a class="btn btn-warning" style="width: 150px;">Add Beer</a>
+</div>
+
+<h5>Beer Collection</h5>
+<table class="table table-dark beer-collection">
+    <thead>
+      <tr>
+        <th scope="col">Beer</th>
+        <th scope="col">ABV</th>
+        <th scope="col">Amount</th>
+        <th scope="col">Edit Amount</th>
+      </tr>
+    </thead>
+    <tbody class="beer-collection-body">
+    
+    </tbody>
+</table>
+
+<%- include('../global/footer.ejs') %>
