@@ -43,7 +43,7 @@ router.get('/api/stocks/shop/:id', async (req, res) => {
 router.get('/api/stocks/beer-shop/:beerID/:shopID', async (req, res) => {
     const beerID = req.params.beerID;
     const shopID = req.params.shopID;
-    const collections = await Stock.query().select('stock.*', 'shop.name', 'shop.address', 'beer.beername', 'beer.abv', 'beer.picture', 'beer.category')
+    const collections = await Stock.query().select('stock.*', 'shop.name', 'shop.address', 'beer.beername', 'beer.abv', 'beer.category')
         .where('beer.id', '=', beerID).andWhere({ 'shop': shopID })
         .join('shop', 'stock.shop', '=', 'shop.id').join('beer', 'stock.beer', '=', 'beer.id');
     if (collections.length > 0) {

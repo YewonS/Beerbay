@@ -8,9 +8,7 @@ exports.up = function(knex) {
         .createTable('beer', (table) => {
             table.increments('id').unique().primary();
             table.string('beername');
-            table.double('abv');
-            table.string('picture');
-            
+            table.double('abv');            
             table.integer('category');
             table.foreign('category').references('category.id');
         })
