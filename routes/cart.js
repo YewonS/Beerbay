@@ -10,7 +10,7 @@ router.get('/api/cart', async (req, res) => {
     for (i in req.session.cart) {
         let [shopID, beerID] = i.split(':');
         try {
-            const beerBar = await Stock.query().select('stock.*', 'shop.name', 'shop.address', 'beer.beername', 'beer.abv', 'beer.picture', 'beer.category')
+            const beerBar = await Stock.query().select('stock.*', 'shop.name', 'shop.address', 'beer.beername', 'beer.abv', 'beer.category')
                 .where('beer.id', '=', beerID).andWhere({ 'shop': shopID })
                 .join('shop', 'stock.shop', '=', 'shop.id').join('beer', 'stock.beer', '=', 'beer.id');
             if (beerBar.length == 0) {
